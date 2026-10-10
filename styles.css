@@ -118,16 +118,13 @@ img, svg { display: block; max-width: 100%; }
   line-height: 1;
 }
 
-.brand__crown { width: 30px; height: 12px; margin-bottom: -1px; color: #a8792f; }
-.brand__crown svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
-
 .brand__monogram {
   color: #493338;
   font-family: var(--serif);
   font-size: 55px;
   font-weight: 700;
   letter-spacing: -.035em;
-  line-height: .72;
+  line-height: .9;
   text-shadow: 0 1px 0 rgba(255,255,255,.9);
 }
 
@@ -135,7 +132,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 9px;
+  margin-top: 6px;
   color: #5e454b;
   font-size: 8px;
   font-weight: 600;
@@ -467,7 +464,6 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
 .footer { padding-block: 80px 28px; background: #272424; color: #f6f0eb; }
 .footer__top { display: grid; grid-template-columns: .8fr 1fr 1.2fr; gap: 70px; align-items: start; }
 .brand--footer { align-items: flex-start; width: max-content; }
-.brand--footer .brand__crown { color: #d0a85d; }
 .brand--footer .brand__monogram { color: #f0dfe1; font-size: 49px; text-shadow: none; }
 .brand--footer .brand__name { color: #d9d2ce; }
 .footer__top > p { max-width: 250px; color: #aaa19d; font-family: var(--serif); font-size: 24px; line-height: 1.2; }
