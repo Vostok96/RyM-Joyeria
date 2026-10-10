@@ -9,7 +9,6 @@
   --gold: #b98a3b;
   --line: rgba(44, 44, 44, 0.13);
   --serif: "Cormorant Garamond", Georgia, serif;
-  --script: "Great Vibes", "Segoe Script", cursive;
   --sans: "Montserrat", Arial, sans-serif;
   --container: min(1280px, calc(100vw - 80px));
   --shadow: 0 24px 80px rgba(80, 62, 45, 0.08);
@@ -96,20 +95,21 @@ img, svg { display: block; max-width: 100%; }
 
 .nav-links a {
   min-width: 104px;
-  border: 1px solid #8b6a70;
+  border: 1px solid #dfc9cd;
   padding: 10px 15px;
-  color: #fffaf8;
-  background: #8b6a70;
+  color: #503b40;
+  background: linear-gradient(135deg, #f3e7e9 0%, #e4d0d4 100%);
+  box-shadow: 0 4px 14px rgba(103, 72, 79, .08);
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-align: center;
   text-transform: uppercase;
-  transition: color .3s ease, background .3s ease, border-color .3s ease, transform .3s ease;
+  transition: color .3s ease, background .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s ease;
 }
 
 .nav-links a:hover,
-.nav-links a:focus-visible { border-color: #6f5056; color: #fff; background: #6f5056; transform: translateY(-2px); }
+.nav-links a:focus-visible { border-color: #d1b1b7; color: #3e2d31; background: linear-gradient(135deg, #ead8dc 0%, #d8bbc1 100%); box-shadow: 0 7px 18px rgba(103, 72, 79, .14); transform: translateY(-2px); }
 
 .brand {
   display: flex;
@@ -122,28 +122,29 @@ img, svg { display: block; max-width: 100%; }
 .brand__crown svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
 
 .brand__monogram {
-  color: #7b5660;
-  font-family: var(--script);
-  font-size: 49px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: .8;
-  text-shadow: 0 1px 0 rgba(255,255,255,.8);
+  color: #493338;
+  font-family: var(--serif);
+  font-size: 55px;
+  font-weight: 700;
+  letter-spacing: -.035em;
+  line-height: .72;
+  text-shadow: 0 1px 0 rgba(255,255,255,.9);
 }
 
 .brand__name {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 7px;
-  font-size: 6px;
+  margin-top: 9px;
+  color: #5e454b;
+  font-size: 8px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 .brand__name::before,
-.brand__name::after { width: 14px; height: 1px; background: #b1843e; content: ""; }
-.brand__name span { color: #b1843e; font-size: 7px; }
+.brand__name::after { width: 16px; height: 1px; background: #b1843e; content: ""; }
+.brand__name span { color: #a7742f; font-size: 8px; }
 
 .menu-toggle,
 .header-whatsapp { display: none; }
@@ -161,8 +162,8 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .mobile-menu:not([hidden]) { display: flex; }
-.mobile-menu a { width: min(290px, 80vw); border: 1px solid #8b6a70; padding: 14px 24px; color: #fffaf8; background: #8b6a70; font-family: var(--serif); font-size: 28px; text-align: center; transition: background .3s ease, transform .3s ease; }
-.mobile-menu a:hover { background: #6f5056; transform: translateY(-2px); }
+.mobile-menu a { width: min(290px, 80vw); border: 1px solid #dfc9cd; padding: 14px 24px; color: #503b40; background: linear-gradient(135deg, #f3e7e9 0%, #e4d0d4 100%); font-family: var(--serif); font-size: 28px; text-align: center; transition: background .3s ease, transform .3s ease; }
+.mobile-menu a:hover { background: linear-gradient(135deg, #ead8dc 0%, #d8bbc1 100%); transform: translateY(-2px); }
 
 .section { padding-block: clamp(100px, 12vw, 170px); }
 
@@ -467,7 +468,7 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
 .footer__top { display: grid; grid-template-columns: .8fr 1fr 1.2fr; gap: 70px; align-items: start; }
 .brand--footer { align-items: flex-start; width: max-content; }
 .brand--footer .brand__crown { color: #d0a85d; }
-.brand--footer .brand__monogram { color: #f0dfe1; text-shadow: none; }
+.brand--footer .brand__monogram { color: #f0dfe1; font-size: 49px; text-shadow: none; }
 .brand--footer .brand__name { color: #d9d2ce; }
 .footer__top > p { max-width: 250px; color: #aaa19d; font-family: var(--serif); font-size: 24px; line-height: 1.2; }
 .footer__nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
