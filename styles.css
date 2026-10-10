@@ -124,7 +124,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: 55px;
   font-weight: 700;
   letter-spacing: -.035em;
-  line-height: .9;
+  line-height: 1;
   text-shadow: 0 1px 0 rgba(255,255,255,.9);
 }
 
@@ -132,7 +132,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 6px;
+  margin-top: 9px;
   color: #5e454b;
   font-size: 8px;
   font-weight: 600;
