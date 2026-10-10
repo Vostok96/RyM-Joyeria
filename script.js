@@ -58,10 +58,15 @@ function productCard(product) {
           </div>
           <p class="product-card__price">${formatPrice(product.price)}</p>
         </div>
-        <button class="product-card__action" type="button" data-product-id="${product.id}" ${soldOut ? "disabled" : ""}>
-          <span>${soldOut ? "Temporalmente agotado" : "Consultar por WhatsApp"}</span>
-          <span aria-hidden="true">${soldOut ? "—" : "↗"}</span>
-        </button>
+        <div class="product-card__actions">
+          <button class="product-card__action" type="button" data-product-id="${product.id}" ${soldOut ? "disabled" : ""}>
+            <span>${soldOut ? "Temporalmente agotado" : "Consultar por WhatsApp"}</span>
+            <span aria-hidden="true">${soldOut ? "—" : "↗"}</span>
+          </button>
+          <button class="product-card__bag" type="button" data-add-product-id="${product.id}" aria-label="Agregar ${product.name} a mi cartera" ${soldOut ? "disabled" : ""}>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 8.5h14l1 11H4l1-11Z"/><path d="M8.5 9V6.8a3.5 3.5 0 0 1 7 0V9"/></svg>
+          </button>
+        </div>
       </div>
     </article>`;
 }
@@ -70,11 +75,131 @@ const grid = document.querySelector("#product-grid");
 grid.innerHTML = products.map(productCard).join("");
 
 grid.addEventListener("click", (event) => {
+  const addButton = event.target.closest("[data-add-product-id]");
+  if (addButton && !addButton.disabled) {
+    toggleBagProduct(Number(addButton.dataset.addProductId));
+    return;
+  }
+
   const button = event.target.closest("[data-product-id]");
   if (!button || button.disabled) return;
   const product = products.find((item) => item.id === Number(button.dataset.productId));
   if (product) window.open(whatsappUrl(product), "_blank", "noopener,noreferrer");
 });
+
+const bagOverlay = document.querySelector("[data-bag-overlay]");
+const bagContent = document.querySelector("[data-bag-content]");
+const bagFooter = document.querySelector("[data-bag-footer]");
+const bagTotal = document.querySelector("[data-bag-total]");
+const bagWhatsapp = document.querySelector("[data-bag-whatsapp]");
+const bagOpenButtons = document.querySelectorAll("[data-bag-open]");
+const bagCountElements = document.querySelectorAll("[data-bag-count]");
+const BAG_STORAGE_KEY = "rym-selected-products";
+
+function loadBag() {
+  try {
+    const storedIds = JSON.parse(localStorage.getItem(BAG_STORAGE_KEY) || "[]");
+    return new Set(storedIds.filter((id) => products.some((product) => product.id === id && product.stock !== "Agotado")));
+  } catch {
+    return new Set();
+  }
+}
+
+const selectedProductIds = loadBag();
+
+function saveBag() {
+  try {
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([...selectedProductIds]));
+  } catch {
+    // La selección sigue funcionando durante la sesión si el navegador bloquea el almacenamiento.
+  }
+}
+
+function bagWhatsappUrl(selectedProducts) {
+  const lines = selectedProducts.map((product) => `• ${product.name} — ${formatPrice(product.price)} (${product.stock})`);
+  const total = selectedProducts.reduce((sum, product) => sum + product.price, 0);
+  const message = `Hola RyM, deseo consultar por estas piezas de mi cartera:\n\n${lines.join("\n")}\n\nTotal referencial: ${formatPrice(total)}. ¿Podrían confirmarme disponibilidad y entrega?`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+function renderBag() {
+  const selectedProducts = products.filter((product) => selectedProductIds.has(product.id));
+  const count = selectedProducts.length;
+
+  bagCountElements.forEach((element) => {
+    element.textContent = String(count);
+    element.setAttribute("aria-label", `${count} ${count === 1 ? "pieza seleccionada" : "piezas seleccionadas"}`);
+  });
+
+  document.querySelectorAll("[data-add-product-id]").forEach((button) => {
+    const product = products.find((item) => item.id === Number(button.dataset.addProductId));
+    const selected = selectedProductIds.has(Number(button.dataset.addProductId));
+    button.classList.toggle("is-selected", selected);
+    if (product) button.setAttribute("aria-label", `${selected ? "Quitar" : "Agregar"} ${product.name} ${selected ? "de" : "a"} mi cartera`);
+  });
+
+  if (!count) {
+    bagContent.innerHTML = `
+      <div class="bag-empty">
+        <div>
+          <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M14 22h36l3 31H11l3-31Z"/><path d="M23 23v-6a9 9 0 0 1 18 0v6"/></svg>
+          <h3>Tu cartera está vacía</h3>
+          <p>Guarda tus piezas favoritas y consúltalas juntas directamente por WhatsApp.</p>
+          <a href="#catalogo" data-bag-close>Descubrir el catálogo</a>
+        </div>
+      </div>`;
+    bagFooter.hidden = true;
+    return;
+  }
+
+  bagContent.innerHTML = selectedProducts.map((product) => `
+    <article class="bag-item">
+      <img src="${product.image}" alt="${product.alt || product.name}" width="82" height="103" decoding="async">
+      <div><h3>${product.name}</h3><p>${product.stock}</p><strong>${formatPrice(product.price)}</strong></div>
+      <button class="bag-item__remove" type="button" data-remove-product-id="${product.id}" aria-label="Quitar ${product.name} de mi cartera">×</button>
+    </article>`).join("");
+
+  const total = selectedProducts.reduce((sum, product) => sum + product.price, 0);
+  bagTotal.textContent = formatPrice(total);
+  bagWhatsapp.href = bagWhatsappUrl(selectedProducts);
+  bagFooter.hidden = false;
+}
+
+function toggleBagProduct(productId) {
+  if (selectedProductIds.has(productId)) selectedProductIds.delete(productId);
+  else selectedProductIds.add(productId);
+  saveBag();
+  renderBag();
+}
+
+function openBag() {
+  bagOverlay.hidden = false;
+  document.body.classList.add("bag-open");
+  bagOpenButtons.forEach((button) => button.setAttribute("aria-expanded", "true"));
+  document.querySelector("[data-bag-close]")?.focus();
+}
+
+function closeBag() {
+  bagOverlay.hidden = true;
+  document.body.classList.remove("bag-open");
+  bagOpenButtons.forEach((button) => button.setAttribute("aria-expanded", "false"));
+}
+
+bagOpenButtons.forEach((button) => button.addEventListener("click", openBag));
+bagOverlay.addEventListener("click", (event) => {
+  const removeButton = event.target.closest("[data-remove-product-id]");
+  if (removeButton) {
+    selectedProductIds.delete(Number(removeButton.dataset.removeProductId));
+    saveBag();
+    renderBag();
+    return;
+  }
+  if (event.target === bagOverlay || event.target.closest("[data-bag-close]")) closeBag();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !bagOverlay.hidden) closeBag();
+});
+renderBag();
 
 function setFilter(filterName) {
   document.querySelectorAll(".filter").forEach((button) => {
