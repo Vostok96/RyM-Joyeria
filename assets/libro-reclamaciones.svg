@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 112" role="img" aria-labelledby="title desc">
   <title id="title">Libro de Reclamaciones</title>
   <desc id="desc">Ilustración de un libro abierto</desc>
-  <g fill="none" stroke="#E6D0D3" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M80 91c-16-13-35-18-60-16V22c24-2 44 4 60 17v52Z" fill="#E6D0D3" fill-opacity=".08" stroke-width="2.4"/>
-    <path d="M80 91c16-13 35-18 60-16V22c-24-2-44 4-60 17v52Z" fill="#E6D0D3" fill-opacity=".08" stroke-width="2.4"/>
+  <g fill="none" stroke="#C58F9A" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M80 91c-16-13-35-18-60-16V22c24-2 44 4 60 17v52Z" fill="#E6D0D3" fill-opacity=".22" stroke-width="2.4"/>
+    <path d="M80 91c16-13 35-18 60-16V22c-24-2-44 4-60 17v52Z" fill="#E6D0D3" fill-opacity=".22" stroke-width="2.4"/>
     <path d="M80 39v52M29 35c16 0 30 4 42 12M29 47c16 0 30 4 42 12M29 59c16 0 30 4 42 12M131 35c-16 0-30 4-42 12M131 47c-16 0-30 4-42 12M131 59c-16 0-30 4-42 12" stroke-width="1.5" opacity=".72"/>
     <path d="M12 83c27-3 49 3 68 16 19-13 41-19 68-16" stroke-width="2.4"/>
   </g>
