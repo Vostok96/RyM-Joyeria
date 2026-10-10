@@ -115,7 +115,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  line-height: 1;
+  line-height: 1.08;
 }
 
 .brand__monogram {
@@ -132,7 +132,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 9px;
+  margin-top: 11px;
   color: #5e454b;
   font-size: 8px;
   font-weight: 600;
