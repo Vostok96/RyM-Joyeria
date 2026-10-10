@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Información legal, políticas y Libro de Reclamaciones de RyM." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Información legal | RyM</title>
+  </head>
+  <body class="legal-page">
+    <header class="legal-header">
+      <a class="brand" href="index.html" aria-label="RyM, volver al inicio">
+        <span class="brand__monogram" aria-hidden="true">RyM</span>
+        <span class="brand__name"><span aria-hidden="true">♥</span> Calidad en cada detalle <span aria-hidden="true">♥</span></span>
+      </a>
+      <a class="legal-header__back" href="index.html">Volver al inicio <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main class="legal-content container">
+      <div class="legal-content__intro">
+        <p class="eyebrow">Transparencia RyM</p>
+        <h1>Información legal</h1>
+        <p>Este espacio reúne nuestras condiciones, políticas y canales formales. Los datos jurídicos definitivos serán incorporados antes de la apertura comercial.</p>
+      </div>
+
+      <section class="legal-card" id="terminos">
+        <span>01</span>
+        <div>
+          <h2>Términos y condiciones</h2>
+          <p>La versión final detallará las condiciones de compra, disponibilidad, precios, medios de coordinación, cambios y responsabilidades aplicables a cada pedido.</p>
+        </div>
+      </section>
+
+      <section class="legal-card" id="envios">
+        <span>02</span>
+        <div>
+          <h2>Políticas de envío</h2>
+          <p>Realizamos envíos a todo el Perú. El costo, plazo estimado y operador logístico se confirmarán por WhatsApp antes de completar cada compra.</p>
+        </div>
+      </section>
+
+      <section class="legal-card" id="privacidad">
+        <span>03</span>
+        <div>
+          <h2>Política de privacidad y protección de datos</h2>
+          <p>La política definitiva explicará qué datos se solicitan, para qué se utilizan, durante cuánto tiempo se conservan y cómo ejercer los derechos correspondientes.</p>
+        </div>
+      </section>
+
+      <section class="legal-card legal-card--book" id="libro-reclamaciones">
+        <img src="assets/libro-reclamaciones.svg" alt="Libro abierto de reclamaciones" width="160" height="112" />
+        <div>
+          <p class="eyebrow">Canal formal</p>
+          <h2>Libro de Reclamaciones</h2>
+          <p>El formulario oficial será habilitado con los datos legales del negocio antes de la apertura comercial. Para recibir atención mientras tanto, puedes escribirnos por WhatsApp.</p>
+          <a class="button button--dark" href="https://wa.me/51917578751?text=Hola%20RyM%2C%20deseo%20realizar%20una%20consulta%20sobre%20el%20Libro%20de%20Reclamaciones." target="_blank" rel="noopener noreferrer">Contactar por WhatsApp <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="legal-page__footer">
+      <small>© <span id="legal-year"></span> RyM. Todos los derechos reservados.</small>
+    </footer>
+    <script>document.getElementById("legal-year").textContent = new Date().getFullYear();</script>
+  </body>
+</html>
