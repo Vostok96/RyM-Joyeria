@@ -127,20 +127,19 @@ img, svg { display: block; max-width: 100%; }
 
 .brand__monogram {
   font-family: var(--serif);
-  font-size: 29px;
+  font-size: 32px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
 }
 
 .brand__monogram span { color: var(--rose-deep); font-size: 0.68em; font-style: italic; }
 
 .brand__name {
   margin-top: 5px;
-  font-size: 7px;
+  font-size: 6px;
   font-weight: 500;
-  letter-spacing: 0.48em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  transform: translateX(0.24em);
 }
 
 .menu-toggle,
@@ -260,17 +259,20 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
 .section-heading { max-width: 670px; margin: 0 auto 70px; text-align: center; }
 .section-heading p:last-child { max-width: 520px; margin: auto; color: var(--muted); font-weight: 300; }
 
-.collection-grid { display: grid; grid-template-columns: 1.15fr 0.9fr 1.15fr; gap: 16px; }
+.collection-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
 
 .collection-card {
   position: relative;
-  min-height: 530px;
+  grid-column: span 2;
+  min-height: 500px;
   overflow: hidden;
   background: #f1efeb;
 }
 
-.collection-card--necklaces { margin-top: 70px; background: #efe2e2; }
-.collection-card--bracelets { background: #f1ece5; }
+.collection-card--necklaces { margin-top: 56px; background: #efe2e2; }
+.collection-card--bracelets { grid-column: span 3; background: #f1ece5; }
+.collection-card--pendants { background: #f2e2e4; }
+.collection-card--earrings { grid-column: span 3; margin-top: 56px; background: #f1ece7; }
 
 .collection-card__number {
   position: absolute;
@@ -361,7 +363,7 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
 .filter:hover, .filter.is-active { border-bottom-color: var(--rose-deep); color: #806369; }
 .filter:focus-visible, .button:focus-visible, a:focus-visible { outline: 2px solid #9c727a; outline-offset: 4px; }
 
-.product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 52px 18px; }
+.product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 58px 20px; }
 .product-card { min-width: 0; }
 
 .product-card__media {
@@ -509,8 +511,10 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
   .hero__picture img { object-position: 62% center; }
   .hero__content { padding-block: 100px 150px; }
   .collection-grid { grid-template-columns: 1fr 1fr; }
+  .collection-card, .collection-card--bracelets, .collection-card--pendants, .collection-card--earrings { grid-column: auto; }
   .collection-card:last-child { grid-column: 1 / -1; min-height: 440px; }
   .collection-card--necklaces { margin-top: 40px; }
+  .collection-card--earrings { margin-top: 0; }
   .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 46px 16px; }
   .care { grid-template-columns: 1fr 1fr; gap: 50px; }
   .care__visual { min-height: 460px; }
@@ -533,7 +537,7 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
   .section-heading { margin-bottom: 48px; }
   .collection-grid { grid-template-columns: 1fr; gap: 14px; }
   .collection-card, .collection-card:last-child { grid-column: auto; min-height: 440px; }
-  .collection-card--necklaces { margin-top: 0; }
+  .collection-card--necklaces, .collection-card--earrings { margin-top: 0; }
   .catalog__top { align-items: flex-start; flex-direction: column; margin-bottom: 38px; }
   .filters { justify-content: flex-start; width: 100%; overflow-x: auto; flex-wrap: nowrap; }
   .filter { flex: 0 0 auto; }

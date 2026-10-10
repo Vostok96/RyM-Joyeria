@@ -1,6 +1,6 @@
-# RyM Joyería
+# RyM — Calidad en cada detalle
 
-Sitio web responsive para el catálogo de alta joyería RyM, diseñado con una dirección visual editorial, carga ligera y checkout directo por WhatsApp.
+Sitio web responsive para el catálogo de accesorios RyM, diseñado con una dirección visual editorial, carga ligera y checkout directo por WhatsApp.
 
 Las fotografías actuales son imágenes editoriales temporales generadas específicamente para la maqueta. No representan el inventario real del cliente y deben reemplazarse por las fotos finales antes del lanzamiento comercial.
 
@@ -29,7 +29,7 @@ El repositorio está listo para importarse directamente en Netlify:
 Los productos están centralizados en el arreglo `products` de `script.js`. Cada producto contiene:
 
 - `name`: nombre visible.
-- `category`: `Anillos`, `Collares` o `Pulseras`.
+- `category`: `Anillos`, `Collares`, `Dijes`, `Pulseras` o `Aretes`.
 - `detail`: material o descripción breve.
 - `price`: número en soles; el sitio lo formatea automáticamente como `S/ 00.00`.
 - `stock`: `Última pieza`, `Pocas unidades`, `Bajo pedido` o `Agotado`.

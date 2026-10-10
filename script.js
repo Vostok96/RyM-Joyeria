@@ -5,8 +5,10 @@ const WHATSAPP_NUMBER = "51917578751";
 const products = [
   { id: 1, name: "Anillo Aurelia", category: "Anillos", detail: "Baño de oro 18k", price: 189, stock: "Última pieza", image: "assets/images/ring-solitaire.webp", imageAvif: "assets/images/ring-solitaire.avif", alt: "Anillo dorado Aurelia con piedra transparente", bg: "#f2eee9" },
   { id: 2, name: "Collar Celeste", category: "Collares", detail: "Madreperla y baño de oro", price: 239, stock: "Pocas unidades", image: "assets/images/necklace-pearl.webp", imageAvif: "assets/images/necklace-pearl.avif", alt: "Collar dorado Celeste con medallón de madreperla", bg: "#f3e8e7" },
-  { id: 3, name: "Pulsera Alma", category: "Pulseras", detail: "Cadena fina y perla", price: 159, stock: "Bajo pedido", image: "assets/images/bracelet-pearl.webp", imageAvif: "assets/images/bracelet-pearl.avif", alt: "Pulsera dorada Alma con perla", bg: "#ece9e4" },
-  { id: 4, name: "Anillo Éclat", category: "Anillos", detail: "Cristal rosa talla oval", price: 219, stock: "Agotado", image: "assets/images/ring-blush.webp", imageAvif: "assets/images/ring-blush.avif", alt: "Anillo dorado Éclat con cristal rosa ovalado", bg: "#f1e9e2" },
+  { id: 3, name: "Dije Amore", category: "Dijes", detail: "Cristal rosa y acabado rose gold", price: 149, stock: "Pocas unidades", image: "assets/images/pendant-heart.webp", imageAvif: "assets/images/pendant-heart.avif", alt: "Dije Amore rose gold en forma de corazón", bg: "#f4e4e5" },
+  { id: 4, name: "Pulsera Alma", category: "Pulseras", detail: "Cadena fina y perla", price: 159, stock: "Bajo pedido", image: "assets/images/bracelet-pearl.webp", imageAvif: "assets/images/bracelet-pearl.avif", alt: "Pulsera dorada Alma con perla", bg: "#ece9e4" },
+  { id: 5, name: "Aretes Lumière", category: "Aretes", detail: "Cristal corazón y acabado rose gold", price: 169, stock: "Última pieza", image: "assets/images/earrings-heart.webp", imageAvif: "assets/images/earrings-heart.avif", alt: "Aretes Lumière rose gold con cristal corazón", bg: "#f2ebe5" },
+  { id: 6, name: "Anillo Éclat", category: "Anillos", detail: "Cristal rosa talla oval", price: 219, stock: "Agotado", image: "assets/images/ring-blush.webp", imageAvif: "assets/images/ring-blush.avif", alt: "Anillo dorado Éclat con cristal rosa ovalado", bg: "#f1e9e2" },
 ];
 
 const artTemplates = {
@@ -23,7 +25,7 @@ const artTemplates = {
 const formatPrice = (price) => `S/ ${Number(price).toFixed(2)}`;
 
 function whatsappUrl(product) {
-  const message = `Hola RyM Joyería, deseo adquirir el ${product.name} que vi en su catálogo por ${formatPrice(product.price)}. Estado: ${product.stock}. ¿Podrían brindarme más información?`;
+  const message = `Hola RyM, deseo adquirir el ${product.name} que vi en su catálogo por ${formatPrice(product.price)}. Estado: ${product.stock}. ¿Podrían brindarme más información?`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
