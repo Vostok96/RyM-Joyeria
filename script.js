@@ -1,14 +1,42 @@
 const WHATSAPP_NUMBER = "51917578751";
 
-// Catálogo demostrativo. Reemplaza estos objetos por tus productos reales.
-// Para fotos finales usa WebP/AVIF de 1200–1600 px, fondo limpio y relación 4:5.
+// Catálogo real de RyM. Los precios quedan pendientes de confirmación comercial.
 const products = [
-  { id: 1, name: "Anillo Aurelia", category: "Anillos", detail: "Baño de oro 18k", price: 189, stock: "Última pieza", image: "assets/images/ring-solitaire.webp", imageAvif: "assets/images/ring-solitaire.avif", alt: "Anillo dorado Aurelia con piedra transparente", bg: "#f2eee9" },
-  { id: 2, name: "Collar Celeste", category: "Collares", detail: "Madreperla y baño de oro", price: 239, stock: "Pocas unidades", image: "assets/images/necklace-pearl.webp", imageAvif: "assets/images/necklace-pearl.avif", alt: "Collar dorado Celeste con medallón de madreperla", bg: "#f3e8e7" },
-  { id: 3, name: "Dije Amore", category: "Dijes", detail: "Cristal rosa y acabado rose gold", price: 149, stock: "Pocas unidades", image: "assets/images/pendant-heart.webp", imageAvif: "assets/images/pendant-heart.avif", alt: "Dije Amore rose gold en forma de corazón", bg: "#f4e4e5" },
-  { id: 4, name: "Pulsera Alma", category: "Pulseras", detail: "Cadena fina y perla", price: 159, stock: "Bajo pedido", image: "assets/images/bracelet-pearl.webp", imageAvif: "assets/images/bracelet-pearl.avif", alt: "Pulsera dorada Alma con perla", bg: "#ece9e4" },
-  { id: 5, name: "Aretes Lumière", category: "Aretes", detail: "Cristal corazón y acabado rose gold", price: 169, stock: "Última pieza", image: "assets/images/earrings-heart.webp", imageAvif: "assets/images/earrings-heart.avif", alt: "Aretes Lumière rose gold con cristal corazón", bg: "#f2ebe5" },
-  { id: 6, name: "Anillo Éclat", category: "Anillos", detail: "Cristal rosa talla oval", price: 219, stock: "Agotado", image: "assets/images/ring-blush.webp", imageAvif: "assets/images/ring-blush.avif", alt: "Anillo dorado Éclat con cristal rosa ovalado", bg: "#f1e9e2" },
+  { id: 1, name: "Anillo Doble Hélice", category: "Anillos", detail: "Anillo", price: null, stock: "Disponible", image: "assets/products/anillos/anillo-doble-helice-2.jpeg", alt: "Anillo Doble Hélice dorado", bg: "#f2eee9" },
+  { id: 2, name: "Anillo Flowersel", category: "Anillos", detail: "Anillo", price: null, stock: "Disponible", image: "assets/products/anillos/anillo-flowersel-1.jpeg", alt: "Anillo Flowersel dorado con diseño floral", bg: "#f3e8e7" },
+  { id: 3, name: "Anillo Pirámide de Luz", category: "Anillos", detail: "Anillo", price: null, stock: "Disponible", image: "assets/products/anillos/anillo-piramide-de-luz-1.jpeg", alt: "Anillo Pirámide de Luz dorado", bg: "#f4e4e5" },
+
+  { id: 4, name: "Argollas Clásicas Gold", category: "Aretes", detail: "Aretes", price: null, stock: "Disponible", image: "assets/products/aretes/argollas-clasicas-gold-1.jpeg", alt: "Argollas Clásicas Gold", bg: "#ece9e4" },
+  { id: 5, name: "Argollas Destello Real", category: "Aretes", detail: "Aretes", price: null, stock: "Disponible", image: "assets/products/aretes/argollas-destello-real-1.jpeg", alt: "Argollas Destello Real doradas", bg: "#f2ebe5" },
+  { id: 6, name: "Cherry Love", category: "Aretes", detail: "Aretes", price: null, stock: "Disponible", image: "assets/products/aretes/cherry-love-1.jpeg", alt: "Aretes Cherry Love con diseño de cerezas", bg: "#f1e9e2" },
+  { id: 7, name: "Corazón Zircon", category: "Aretes", detail: "Aretes", price: null, stock: "Disponible", image: "assets/products/aretes/corazon-zircon-1.jpeg", alt: "Aretes Corazón Zircon", bg: "#f2eee9" },
+  { id: 8, name: "Mariposa Cristal", category: "Aretes", detail: "Aretes", price: null, stock: "Disponible", image: "assets/products/aretes/mariposa-cristal-1.jpeg", alt: "Aretes Mariposa Cristal", bg: "#f3e8e7" },
+
+  { id: 9, name: "Cadena Cordón Imperial", category: "Collares", detail: "Cadena", price: null, stock: "Disponible", image: "assets/products/collares/cadena-cordon-imperial-1.jpeg", alt: "Cadena Cordón Imperial dorada", bg: "#f4e4e5" },
+  { id: 10, name: "Cadena Grumet Fina", category: "Collares", detail: "Cadena", price: null, stock: "Disponible", image: "assets/products/collares/cadena-grumet-fina-1.jpeg", alt: "Cadena Grumet Fina dorada", bg: "#ece9e4" },
+  { id: 11, name: "Cadena Minimal Gold", category: "Collares", detail: "Cadena", price: null, stock: "Disponible", image: "assets/products/collares/cadena-minimal-gold-1.jpeg", alt: "Cadena Minimal Gold", bg: "#f2ebe5" },
+  { id: 12, name: "Collar Brújula del Destino", category: "Collares", detail: "Collar", price: null, stock: "Disponible", image: "assets/products/collares/collar-brujula-del-destino-1.jpeg", alt: "Collar Brújula del Destino dorado", bg: "#f1e9e2" },
+  { id: 13, name: "Collar Constelación", category: "Collares", detail: "Collar", price: null, stock: "Disponible", image: "assets/products/collares/collar-constelacion-1.jpeg", alt: "Collar Constelación dorado", bg: "#f2eee9" },
+  { id: 14, name: "Collar Estrella Brillante", category: "Collares", detail: "Collar", price: null, stock: "Disponible", image: "assets/products/collares/collar-estrella-brillante-1.jpeg", alt: "Collar Estrella Brillante dorado", bg: "#f3e8e7" },
+  { id: 15, name: "Collar Primeros Pasos", category: "Collares", detail: "Collar", price: null, stock: "Disponible", image: "assets/products/collares/collar-primeros-pasos-1.jpeg", alt: "Collar Primeros Pasos dorado", bg: "#f4e4e5" },
+  { id: 16, name: "Rosario Edición Celestial", category: "Collares", detail: "Rosario", price: null, stock: "Disponible", image: "assets/products/collares/rosario-edicion-celestial-1.jpeg", alt: "Rosario Edición Celestial dorado", bg: "#ece9e4" },
+
+  { id: 17, name: "Colibrí de Luz", category: "Dijes", detail: "Dije", price: null, stock: "Disponible", image: "assets/products/dijes/colibri-de-luz-1.jpeg", alt: "Dije Colibrí de Luz dorado", bg: "#f2ebe5" },
+  { id: 18, name: "Dije René", category: "Dijes", detail: "Dije", price: null, stock: "Disponible", image: "assets/products/dijes/dije-rene-1.jpeg", alt: "Dije René dorado", bg: "#f1e9e2" },
+  { id: 19, name: "Dije San Benito", category: "Dijes", detail: "Dije", price: null, stock: "Disponible", image: "assets/products/dijes/dije-san-benito-1.jpeg", alt: "Dije San Benito dorado", bg: "#f2eee9" },
+  { id: 20, name: "Dije Sueño de Hada", category: "Dijes", detail: "Dije", price: null, stock: "Disponible", image: "assets/products/dijes/dije-sueno-de-hada-1.jpeg", alt: "Dije Sueño de Hada dorado", bg: "#f3e8e7" },
+  { id: 21, name: "Virgen de Guadalupe", category: "Dijes", detail: "Dije", price: null, stock: "Disponible", image: "assets/products/dijes/virgen-de-guadalupe-1.jpeg", alt: "Dije Virgen de Guadalupe dorado", bg: "#f4e4e5" },
+
+  { id: 22, name: "Dúo Cherry Brillante", category: "Dijes + Aretes", detail: "Dije + aretes", price: null, stock: "Disponible", image: "assets/products/dijes-aretes/duo-cherry-brillante-1.jpeg", alt: "Dúo Cherry Brillante de dije y aretes", bg: "#ece9e4" },
+  { id: 23, name: "Dúo Conejito Pastel", category: "Dijes + Aretes", detail: "Dije + aretes", price: null, stock: "Disponible", image: "assets/products/dijes-aretes/duo-conejito-pastel-1.jpeg", alt: "Dúo Conejito Pastel de dije y aretes", bg: "#f2ebe5" },
+  { id: 24, name: "Dúo Estrella Zircon", category: "Dijes + Aretes", detail: "Dije + aretes", price: null, stock: "Disponible", image: "assets/products/dijes-aretes/duo-estrella-zircon-1.jpeg", alt: "Dúo Estrella Zircon de dije y aretes", bg: "#f1e9e2" },
+
+  { id: 25, name: "Brazalete Dorada Seducción", category: "Pulseras", detail: "Brazalete", price: null, stock: "Disponible", image: "assets/products/pulseras/brazalete-dorada-seduccion-1.jpeg", alt: "Brazalete Dorada Seducción", bg: "#f2eee9" },
+  { id: 26, name: "Brazalete Malla Dorada", category: "Pulseras", detail: "Brazalete", price: null, stock: "Disponible", image: "assets/products/pulseras/brazalete-malla-dorada-1.jpeg", alt: "Brazalete Malla Dorada", bg: "#f3e8e7" },
+  { id: 27, name: "Pulsera Brisa Marina", category: "Pulseras", detail: "Pulsera", price: null, stock: "Disponible", image: "assets/products/pulseras/pulsera-brisa-marina-1.jpeg", alt: "Pulsera Brisa Marina", bg: "#f4e4e5" },
+  { id: 28, name: "Pulsera Brisa Marina Roja", category: "Pulseras", detail: "Pulsera", price: null, stock: "Disponible", image: "assets/products/pulseras/pulsera-brisa-marina-roja-1.jpeg", alt: "Pulsera Brisa Marina Roja", bg: "#ece9e4" },
+  { id: 29, name: "Pulsera Corazón Estelar", category: "Pulseras", detail: "Pulsera", price: null, stock: "Disponible", image: "assets/products/pulseras/pulsera-corazon-estelar-1.jpeg", alt: "Pulsera Corazón Estelar", bg: "#f2ebe5" },
+  { id: 30, name: "Pulsera Primavera Rosa", category: "Pulseras", detail: "Pulsera", price: null, stock: "Disponible", image: "assets/products/pulseras/pulsera-primavera-rosa-1.jpeg", alt: "Pulsera Primavera Rosa", bg: "#f1e9e2" },
 ];
 
 const artTemplates = {
@@ -22,10 +50,12 @@ const artTemplates = {
   medallion: `<svg viewBox="0 0 360 420" aria-hidden="true"><defs><linearGradient id="g8" x1="60" y1="40" x2="300" y2="350"><stop stop-color="#ffed9f"/><stop offset=".35" stop-color="#ab701e"/><stop offset=".65" stop-color="#f3d477"/><stop offset="1" stop-color="#895619"/></linearGradient></defs><path d="M58 65c27 129 65 190 122 223 57-33 95-94 122-223" fill="none" stroke="url(#g8)" stroke-width="5"/><circle cx="180" cy="288" r="60" fill="url(#g8)"/><circle cx="180" cy="288" r="48" fill="#d4a44e" stroke="#ffe89c" stroke-width="3"/><path d="M180 258c-19 11-29 26-29 43 11-4 21-3 29 7 8-10 18-11 29-7 0-17-10-32-29-43z" fill="#efd17b" opacity=".85"/><circle cx="180" cy="215" r="10" fill="#f4d06e" stroke="#95601b" stroke-width="4"/></svg>`,
 };
 
-const formatPrice = (price) => `S/ ${Number(price).toFixed(2)}`;
+const hasPrice = (product) => Number.isFinite(product.price);
+const formatPrice = (price) => Number.isFinite(price) ? `S/ ${price.toFixed(2)}` : "Consultar";
 
 function whatsappUrl(product) {
-  const message = `Hola RyM, deseo adquirir el ${product.name} que vi en su catálogo por ${formatPrice(product.price)}. Estado: ${product.stock}. ¿Podrían brindarme más información?`;
+  const priceText = hasPrice(product) ? ` por ${formatPrice(product.price)}` : "";
+  const message = `Hola RyM, deseo adquirir ${product.name}, que vi en su catálogo${priceText}. Estado: ${product.stock}. ¿Podrían brindarme más información?`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
@@ -94,7 +124,7 @@ const bagTotal = document.querySelector("[data-bag-total]");
 const bagWhatsapp = document.querySelector("[data-bag-whatsapp]");
 const bagOpenButtons = document.querySelectorAll("[data-bag-open]");
 const bagCountElements = document.querySelectorAll("[data-bag-count]");
-const BAG_STORAGE_KEY = "rym-selected-products";
+const BAG_STORAGE_KEY = "rym-selected-products-v2";
 
 function loadBag() {
   try {
@@ -117,8 +147,10 @@ function saveBag() {
 
 function bagWhatsappUrl(selectedProducts) {
   const lines = selectedProducts.map((product) => `• ${product.name} — ${formatPrice(product.price)} (${product.stock})`);
-  const total = selectedProducts.reduce((sum, product) => sum + product.price, 0);
-  const message = `Hola RyM, deseo consultar por estas piezas de mi cartera:\n\n${lines.join("\n")}\n\nTotal referencial: ${formatPrice(total)}. ¿Podrían confirmarme disponibilidad y entrega?`;
+  const pricedProducts = selectedProducts.filter(hasPrice);
+  const total = pricedProducts.reduce((sum, product) => sum + product.price, 0);
+  const totalText = pricedProducts.length === selectedProducts.length ? `\n\nTotal referencial: ${formatPrice(total)}.` : "";
+  const message = `Hola RyM, deseo consultar por estas piezas de mi cartera:\n\n${lines.join("\n")}${totalText}\n\n¿Podrían confirmarme precios, disponibilidad y entrega?`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
@@ -159,8 +191,9 @@ function renderBag() {
       <button class="bag-item__remove" type="button" data-remove-product-id="${product.id}" aria-label="Quitar ${product.name} de mi cartera">×</button>
     </article>`).join("");
 
-  const total = selectedProducts.reduce((sum, product) => sum + product.price, 0);
-  bagTotal.textContent = formatPrice(total);
+  const pricedProducts = selectedProducts.filter(hasPrice);
+  const total = pricedProducts.reduce((sum, product) => sum + product.price, 0);
+  bagTotal.textContent = pricedProducts.length === selectedProducts.length ? formatPrice(total) : "Por confirmar";
   bagWhatsapp.href = bagWhatsappUrl(selectedProducts);
   bagFooter.hidden = false;
 }

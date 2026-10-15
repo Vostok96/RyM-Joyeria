@@ -1,8 +1,8 @@
 # RyM — Calidad en cada detalle
 
-Sitio web responsive para el catálogo de accesorios RyM, diseñado con una dirección visual editorial, carga ligera y checkout directo por WhatsApp.
+Sitio web responsive para el catálogo de accesorios RyM, diseñado con una dirección visual editorial, carga ligera y consulta directa por WhatsApp.
 
-Las fotografías actuales son imágenes editoriales temporales generadas específicamente para la maqueta. No representan el inventario real del cliente y deben reemplazarse por las fotos finales antes del lanzamiento comercial.
+El catálogo contiene 30 productos reales organizados en Anillos, Aretes, Collares, Dijes, Dijes + Aretes y Pulseras. Sus fotografías están en `assets/products/`, separadas por categoría.
 
 ## Ejecutar localmente
 
@@ -29,20 +29,16 @@ El repositorio está listo para importarse directamente en Netlify:
 Los productos están centralizados en el arreglo `products` de `script.js`. Cada producto contiene:
 
 - `name`: nombre visible.
-- `category`: `Anillos`, `Collares`, `Dijes`, `Pulseras` o `Aretes`.
+- `category`: `Anillos`, `Aretes`, `Collares`, `Dijes`, `Dijes + Aretes` o `Pulseras`.
 - `detail`: material o descripción breve.
-- `price`: número en soles; el sitio lo formatea automáticamente como `S/ 00.00`.
-- `stock`: `Última pieza`, `Pocas unidades`, `Bajo pedido` o `Agotado`.
-- `art`: ilustración temporal asociada.
+- `price`: número en soles; usa `null` mientras el precio esté pendiente y el sitio mostrará `Consultar`.
+- `stock`: texto visible de disponibilidad.
+- `image`: ruta a la fotografía principal del producto.
 - `bg`: fondo de la tarjeta.
 
-Cuando tengas una foto real, agrega `image: "assets/productos/anillo-aurelia.webp"` y, opcionalmente, `imageAvif: "assets/productos/anillo-aurelia.avif"` y `alt: "Anillo Aurelia dorado con cristal"`. La foto reemplazará automáticamente la ilustración temporal.
+Cada producto debe incluir también un texto `alt` breve y descriptivo para accesibilidad.
 
 El número de WhatsApp se configura una sola vez en `WHATSAPP_NUMBER`.
-
-## Sustituir ilustraciones por fotografías
-
-Para producción, exporta cada foto en AVIF y WebP, idealmente a 1200 × 1500 px, sin personas y con fondo limpio. Usa `loading="lazy"`, `decoding="async"`, `width` y `height` para evitar saltos de diseño. Conserva la proporción 4:5 de `.product-card__media`.
 
 Antes del lanzamiento, sustituye también el enlace genérico de Instagram en `index.html` por el perfil oficial de la marca.
 
