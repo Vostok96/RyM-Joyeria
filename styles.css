@@ -586,6 +586,9 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
 .footer__whatsapp span { color: #a77d86; font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
 .footer__whatsapp strong { color: #79535c; font-size: 14px; font-weight: 500; letter-spacing: .08em; }
 .footer__whatsapp:hover strong { color: #b47783; }
+.footer__business { display: flex; justify-content: center; gap: 7px 18px; flex-wrap: wrap; max-width: 760px; margin: 18px 0 0; color: #8d6470; font-size: 8px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.footer__business span { position: relative; padding-left: 18px; }
+.footer__business span::before { position: absolute; top: 50%; left: 0; width: 3px; aspect-ratio: 1; border-radius: 50%; background: #c36a84; content: ""; transform: translateY(-50%); }
 .footer__social { display: flex; gap: 12px; margin-top: 24px; }
 .footer__social a { display: grid; width: 38px; aspect-ratio: 1; border: 1px solid #dcc5ca; border-radius: 50%; color: #916873; place-items: center; transition: color .3s ease, border-color .3s ease, background .3s ease, transform .3s ease; }
 .footer__social a:hover { border-color: #c58f9a; background: #f5e9eb; color: #704852; transform: translateY(-2px); }
@@ -653,14 +656,34 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
 .legal-content__intro { max-width: 760px; margin: 0 auto 76px; text-align: center; }
 .legal-content__intro h1 { margin-bottom: 24px; font-size: clamp(58px, 8vw, 104px); }
 .legal-content__intro > p:last-child { color: var(--muted); font-weight: 300; line-height: 1.8; }
+.legal-company { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(42px, 7vw, 90px); max-width: 1040px; margin: 0 auto 70px; border: 1px solid #e8a9bb; padding: clamp(34px, 6vw, 72px); background: linear-gradient(135deg, #f8c9d6 0%, #eca1b7 100%); box-shadow: 0 25px 70px rgba(134,53,77,.1); }
+.legal-company__heading h2 { margin-bottom: 24px; font-size: clamp(38px, 4.8vw, 61px); line-height: .98; }
+.legal-status { display: inline-flex; border: 1px solid rgba(104,42,60,.28); padding: 8px 13px; color: #71364a; font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.legal-company__facts { margin: 0; }
+.legal-company__facts div { display: grid; grid-template-columns: 145px 1fr; gap: 22px; border-bottom: 1px solid rgba(105,54,69,.18); padding: 14px 0; }
+.legal-company__facts div:first-child { padding-top: 0; }
+.legal-company__facts dt { color: #8c4f61; font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.legal-company__facts dd { margin: 0; color: #56313d; font-size: 12px; line-height: 1.55; }
+.legal-company__facts a { border-bottom: 1px solid rgba(86,49,61,.32); }
+.legal-notice { grid-column: 1 / -1; margin: 0; border-left: 2px solid #ad4967; padding: 13px 18px; background: rgba(255,246,249,.5); color: #65414c; font-size: 11px; }
 .legal-card { display: grid; grid-template-columns: 70px 1fr; gap: 36px; max-width: 900px; margin: 0 auto; border-top: 1px solid #ded1d2; padding: 48px 0; }
 .legal-card > span { color: #b4878f; font-family: var(--serif); font-size: 18px; }
 .legal-card h2 { margin-bottom: 14px; font-size: clamp(34px, 4vw, 52px); }
 .legal-card p { max-width: 720px; color: var(--muted); font-weight: 300; line-height: 1.8; }
+.legal-card p + p { margin-top: 18px; }
+.legal-list { display: grid; gap: 13px; max-width: 740px; margin: 26px 0 0; padding-left: 18px; color: #6e5d62; font-size: 12px; font-weight: 300; line-height: 1.75; }
+.legal-list li::marker { color: var(--rose-deep); }
+.legal-list strong { color: #54333e; font-weight: 600; }
+.legal-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+.legal-chips span { border: 1px solid #e3a8b8; padding: 7px 12px; background: #feeaf0; color: #7c4355; font-size: 8px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.legal-inline-note { margin-top: 26px; border-left: 2px solid #d76b89; padding: 13px 17px; background: #fde7ed; font-size: 11px; }
 .legal-card--book { grid-template-columns: 190px 1fr; align-items: center; margin-top: 30px; border: 0; padding: 54px; background: linear-gradient(135deg, #f6c5d3, #eca0b6); }
 .legal-card--book img { width: 160px; }
 .legal-card--book .eyebrow { margin-bottom: 12px; }
 .legal-card--book .button { margin-top: 24px; }
+.legal-book__status { border-left: 2px solid #a6405f; padding-left: 16px; }
+.legal-book__actions { display: flex; align-items: center; gap: 20px 28px; flex-wrap: wrap; margin-top: 26px; }
+.legal-book__actions .button, .legal-book__actions .text-link { margin-top: 0; }
 .legal-page__footer { border-top: 1px solid #edbdca; padding: 28px; background: #f9d9e2; color: #8c5665; font-size: 8px; letter-spacing: .1em; text-align: center; text-transform: uppercase; }
 
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
@@ -750,10 +773,21 @@ h2 { margin-bottom: 26px; font-size: clamp(46px, 5.6vw, 82px); letter-spacing: -
   .legal-header { min-height: 96px; }
   .legal-header__back { font-size: 0; }
   .legal-header__back span { font-size: 18px; }
+  .legal-content { min-width: 0; overflow: hidden; }
+  .legal-content__intro { max-width: 100%; }
+  .legal-content__intro h1 { font-size: 48px; letter-spacing: -.05em; }
+  .legal-content__intro h1 span { display: block; }
   .legal-card { grid-template-columns: 34px 1fr; gap: 16px; padding-block: 36px; }
+  .legal-company { grid-template-columns: minmax(0, 1fr); width: 100%; min-width: 0; padding: 34px 24px; }
+  .legal-company > * { min-width: 0; }
+  .legal-company__heading h2 { font-size: 35px; overflow-wrap: anywhere; }
+  .legal-company__facts div { grid-template-columns: 1fr; gap: 4px; }
+  .legal-notice { grid-column: auto; }
   .legal-card--book { grid-template-columns: 1fr; padding: 36px 24px; text-align: center; }
   .legal-card--book img { margin-inline: auto; }
   .legal-card--book .button { justify-content: center; }
+  .legal-book__status { border-left: 0; border-top: 2px solid #a6405f; padding: 14px 0 0; }
+  .legal-book__actions { justify-content: center; }
   .bag-drawer__header { padding: 26px 22px 20px; }
   .bag-drawer__header h2 { font-size: 38px; }
   .bag-drawer__content { padding-inline: 22px; }
