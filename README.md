@@ -39,6 +39,8 @@ Los productos están centralizados en el arreglo `products` de `script.js`. Cada
 
 Cada producto debe incluir también un texto `alt` breve y descriptivo para accesibilidad.
 
+Las fotografías adicionales se detectan mediante la numeración de archivos (`-1.jpeg`, `-2.jpeg`, etc.) y la configuración `galleryCounts` de `script.js`. Al seleccionar una tarjeta, `producto.html` abre la ficha individual y muestra esas imágenes como galería con miniaturas, navegación por teclado y gesto de deslizamiento. Cuando una pieza solo tiene una fotografía, los controles del carrusel se ocultan automáticamente.
+
 El número de WhatsApp se configura una sola vez en `WHATSAPP_NUMBER`.
 
 Antes del lanzamiento, sustituye también el enlace genérico de Instagram en `index.html` por el perfil oficial de la marca.
@@ -49,10 +51,13 @@ Para un modelo 3D, carga `<model-viewer>` solo al abrir el detalle del producto 
 
 ```text
 RyM-Joyeria/
-├── index.html   # estructura semántica y contenido
-├── styles.css   # sistema visual, responsive y animaciones
-├── script.js    # catálogo, filtros, menú y WhatsApp dinámico
-├── netlify.toml # configuración de despliegue y caché
-├── assets/      # fotografías optimizadas AVIF/WebP
-└── README.md    # guía rápida de mantenimiento
+├── index.html         # catálogo y colecciones
+├── producto.html      # ficha individual de cada joya
+├── styles.css         # sistema visual general y responsive
+├── product.css        # presentación responsive de la ficha
+├── script.js          # productos, galerías, filtros y WhatsApp
+├── product-detail.js  # carrusel y contenido de cada ficha
+├── netlify.toml       # configuración de despliegue y caché
+├── assets/            # fotografías reales de los productos
+└── README.md          # guía rápida de mantenimiento
 ```

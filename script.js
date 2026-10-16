@@ -42,6 +42,24 @@ const products = [
   { id: 32, name: "Mini Joyero Glamour Shocking Pink", category: "Cofres", detail: "Mini joyero", description: "Formato compacto y vibrante para llevar tus joyas favoritas a todas partes.", price: null, stock: "Disponible", image: "assets/products/cofres/mini-joyero-glamour-shocking-pink-1.jpeg", alt: "Mini Joyero Glamour Shocking Pink abierto", bg: "#f2ebe5" },
 ];
 
+const galleryCounts = {
+  1: 3, 2: 3, 3: 3, 4: 2, 5: 1, 6: 1, 7: 1, 8: 1,
+  9: 3, 10: 3, 11: 2, 12: 3, 13: 3, 14: 3, 15: 3, 16: 3,
+  17: 3, 18: 2, 19: 3, 20: 3, 21: 3, 22: 2, 23: 2, 24: 2,
+  25: 2, 26: 3, 27: 3, 28: 3, 29: 3, 30: 2, 31: 1, 32: 1,
+};
+
+products.forEach((product) => {
+  const imageBase = product.image.replace(/-\d+\.jpeg$/, "");
+  const galleryImages = Array.from(
+    { length: galleryCounts[product.id] || 1 },
+    (_, index) => `${imageBase}-${index + 1}.jpeg`,
+  );
+  product.images = [product.image, ...galleryImages.filter((image) => image !== product.image)];
+});
+
+window.RYM_PRODUCTS = products;
+
 const artTemplates = {
   solitaire: `<svg viewBox="0 0 360 420" aria-hidden="true"><defs><linearGradient id="g1" x1="80" y1="90" x2="290" y2="340"><stop stop-color="#fff1ad"/><stop offset=".35" stop-color="#b77c24"/><stop offset=".63" stop-color="#f4d36e"/><stop offset="1" stop-color="#8b5819"/></linearGradient><linearGradient id="d1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#eadedf"/><stop offset="1" stop-color="#b9a3a7"/></linearGradient></defs><ellipse cx="180" cy="248" rx="105" ry="76" fill="none" stroke="url(#g1)" stroke-width="18"/><path d="M142 178l12-48h52l12 48-38 29z" fill="url(#d1)" stroke="#b77c24" stroke-width="7"/><path d="M154 130l26 77 26-77M142 178h76" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3"/></svg>`,
   pendant: `<svg viewBox="0 0 360 420" aria-hidden="true"><defs><linearGradient id="g2" x1="60" y1="35" x2="285" y2="360"><stop stop-color="#ffe997"/><stop offset=".4" stop-color="#ad7320"/><stop offset=".65" stop-color="#efd06a"/><stop offset="1" stop-color="#85521a"/></linearGradient><radialGradient id="p2" cx=".35" cy=".25"><stop stop-color="#fff"/><stop offset=".55" stop-color="#f5e9e7"/><stop offset="1" stop-color="#c4abad"/></radialGradient></defs><path d="M62 74c24 118 59 176 118 211 59-35 94-93 118-211" fill="none" stroke="url(#g2)" stroke-width="5"/><circle cx="180" cy="281" r="54" fill="url(#p2)" stroke="url(#g2)" stroke-width="8"/><circle cx="180" cy="214" r="11" fill="#f4d06a" stroke="#9a631c" stroke-width="4"/></svg>`,
@@ -79,14 +97,14 @@ function productCard(product) {
     : artTemplates[product.art];
   return `
     <article class="product-card reveal" data-category="${product.category}" style="--product-bg:${product.bg}">
-      <div class="product-card__media">
+      <a class="product-card__media" href="producto.html?id=${product.id}" aria-label="Ver detalles de ${product.name}">
         <span class="product-card__badge${soldOut ? " product-card__badge--sold" : ""}">${product.stock}</span>
         <div class="product-card__image${product.image ? " product-card__image--photo" : ""}">${media}</div>
-      </div>
+      </a>
       <div class="product-card__body">
         <div class="product-card__meta">
           <div>
-            <h3 class="product-card__name">${product.name}</h3>
+            <h3 class="product-card__name"><a href="producto.html?id=${product.id}">${product.name}</a></h3>
             <p class="product-card__type">${product.detail}</p>
           </div>
           <p class="product-card__price">${formatPrice(product.price)}</p>
@@ -106,6 +124,7 @@ function productCard(product) {
 }
 
 const grid = document.querySelector("#product-grid");
+if (grid) {
 grid.innerHTML = products.map(productCard).join("");
 
 grid.addEventListener("click", (event) => {
@@ -307,3 +326,4 @@ const observer = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 document.querySelector("#current-year").textContent = new Date().getFullYear();
+}
