@@ -24,6 +24,8 @@ El repositorio está listo para importarse directamente en Netlify:
 
 `netlify.toml` ya incluye la configuración de publicación, cabeceras de seguridad y caché de imágenes.
 
+Los archivos CSS y JavaScript usan revalidación inmediata para que los cambios publicados no queden retenidos en dispositivos que visitaron una versión anterior. Las referencias desde los archivos HTML incluyen además un parámetro de versión para invalidar la caché heredada. Las fotografías de productos se revalidan después de una hora; los recursos de marca que no cambian conservan una caché prolongada.
+
 ## Actualizar el catálogo
 
 Los productos están centralizados en el arreglo `products` de `script.js`. Cada producto contiene:
