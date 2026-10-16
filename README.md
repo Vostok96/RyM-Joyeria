@@ -2,7 +2,7 @@
 
 Sitio web responsive para el catálogo de accesorios RyM, diseñado con una dirección visual editorial, carga ligera y consulta directa por WhatsApp.
 
-El catálogo contiene 30 productos reales organizados en Anillos, Aretes, Collares, Dijes, Dijes + Aretes y Pulseras. Sus fotografías están en `assets/products/`, separadas por categoría.
+El catálogo contiene 32 productos reales organizados en Anillos, Aretes, Cofres, Collares, Dijes, Dijes + Aretes y Pulseras. Sus fotografías están en `assets/products/`, separadas por categoría.
 
 ## Ejecutar localmente
 
@@ -29,8 +29,9 @@ El repositorio está listo para importarse directamente en Netlify:
 Los productos están centralizados en el arreglo `products` de `script.js`. Cada producto contiene:
 
 - `name`: nombre visible.
-- `category`: `Anillos`, `Aretes`, `Collares`, `Dijes`, `Dijes + Aretes` o `Pulseras`.
+- `category`: `Anillos`, `Aretes`, `Cofres`, `Collares`, `Dijes`, `Dijes + Aretes` o `Pulseras`.
 - `detail`: material o descripción breve.
+- `description`: frase comercial breve y específica de la pieza.
 - `price`: número en soles; usa `null` mientras el precio esté pendiente y el sitio mostrará `Consultar`.
 - `stock`: texto visible de disponibilidad.
 - `image`: ruta a la fotografía principal del producto.
