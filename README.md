@@ -41,6 +41,8 @@ Cada producto debe incluir también un texto `alt` breve y descriptivo para acce
 
 Las fotografías adicionales se detectan mediante la numeración de archivos (`-1.jpeg`, `-2.jpeg`, etc.) y la configuración `galleryCounts` de `script.js`. Al seleccionar una tarjeta, `producto.html` abre la ficha individual y muestra esas imágenes como galería con miniaturas, navegación por teclado y gesto de deslizamiento. Cuando una pieza solo tiene una fotografía, los controles del carrusel se ocultan automáticamente.
 
+Las portadas de la sección de colecciones alternan fotografías reales de su misma categoría mediante un fundido suave y aleatorio. La rotación se pausa cuando la sección sale de la pantalla o la pestaña queda en segundo plano, y se desactiva cuando el dispositivo solicita movimiento reducido.
+
 El número de WhatsApp se configura una sola vez en `WHATSAPP_NUMBER`.
 
 Antes del lanzamiento, sustituye también el enlace genérico de Instagram en `index.html` por el perfil oficial de la marca.

@@ -60,6 +60,120 @@ products.forEach((product) => {
 
 window.RYM_PRODUCTS = products;
 
+function setupCollectionSlideshows() {
+  const collectionSection = document.querySelector("#colecciones");
+  const collectionCards = [...document.querySelectorAll(".collection-card[data-filter-link]")];
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (!collectionSection || !collectionCards.length || reduceMotion.matches) return;
+
+  const slideshows = collectionCards.map((card, cardIndex) => {
+    const art = card.querySelector(".collection-card__art");
+    const initialImage = art?.querySelector("img");
+    const category = card.dataset.filterLink;
+    const imagePool = [...new Set(
+      products
+        .filter((product) => product.category === category)
+        .flatMap((product) => product.images),
+    )];
+
+    if (!art || !initialImage || imagePool.length < 2) return null;
+
+    initialImage.classList.add("collection-card__image", "is-active");
+
+    const standbyImage = document.createElement("img");
+    standbyImage.className = "collection-card__image";
+    standbyImage.alt = "";
+    standbyImage.width = 1200;
+    standbyImage.height = 1500;
+    standbyImage.loading = "lazy";
+    standbyImage.decoding = "async";
+    art.append(standbyImage);
+
+    let activeImage = initialImage;
+    let inactiveImage = standbyImage;
+    let currentSource = initialImage.getAttribute("src");
+    let timerId;
+    let running = false;
+    let loading = false;
+
+    const schedule = (firstChange = false) => {
+      if (!running) return;
+      const baseDelay = firstChange ? 2200 + cardIndex * 420 : 5200;
+      timerId = window.setTimeout(showNext, baseDelay + Math.random() * 1800);
+    };
+
+    const finishSwap = (nextSource) => {
+      if (!running) {
+        loading = false;
+        return;
+      }
+
+      inactiveImage.classList.add("is-active");
+      activeImage.classList.remove("is-active");
+      [activeImage, inactiveImage] = [inactiveImage, activeImage];
+      currentSource = nextSource;
+      loading = false;
+      schedule();
+    };
+
+    function showNext() {
+      if (!running || loading) return;
+
+      const candidates = imagePool.filter((source) => source !== currentSource);
+      const nextSource = candidates[Math.floor(Math.random() * candidates.length)];
+      let completed = false;
+      loading = true;
+
+      const completeOnce = () => {
+        if (completed) return;
+        completed = true;
+        finishSwap(nextSource);
+      };
+
+      inactiveImage.onload = completeOnce;
+      inactiveImage.onerror = () => {
+        if (completed) return;
+        completed = true;
+        loading = false;
+        schedule();
+      };
+      inactiveImage.src = nextSource;
+
+      if (inactiveImage.complete && inactiveImage.naturalWidth) completeOnce();
+    }
+
+    return {
+      start() {
+        if (running) return;
+        running = true;
+        schedule(true);
+      },
+      stop() {
+        running = false;
+        window.clearTimeout(timerId);
+      },
+    };
+  }).filter(Boolean);
+
+  let sectionVisible = false;
+
+  const updatePlayback = () => {
+    const shouldPlay = sectionVisible && !document.hidden;
+    slideshows.forEach((slideshow) => slideshow[shouldPlay ? "start" : "stop"]());
+  };
+
+  const visibilityObserver = new IntersectionObserver(([entry]) => {
+    sectionVisible = entry.isIntersecting;
+    updatePlayback();
+  }, { threshold: 0.12 });
+
+  visibilityObserver.observe(collectionSection);
+  document.addEventListener("visibilitychange", updatePlayback);
+}
+
+setupCollectionSlideshows();
+
 const artTemplates = {
   solitaire: `<svg viewBox="0 0 360 420" aria-hidden="true"><defs><linearGradient id="g1" x1="80" y1="90" x2="290" y2="340"><stop stop-color="#fff1ad"/><stop offset=".35" stop-color="#b77c24"/><stop offset=".63" stop-color="#f4d36e"/><stop offset="1" stop-color="#8b5819"/></linearGradient><linearGradient id="d1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#eadedf"/><stop offset="1" stop-color="#b9a3a7"/></linearGradient></defs><ellipse cx="180" cy="248" rx="105" ry="76" fill="none" stroke="url(#g1)" stroke-width="18"/><path d="M142 178l12-48h52l12 48-38 29z" fill="url(#d1)" stroke="#b77c24" stroke-width="7"/><path d="M154 130l26 77 26-77M142 178h76" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3"/></svg>`,
   pendant: `<svg viewBox="0 0 360 420" aria-hidden="true"><defs><linearGradient id="g2" x1="60" y1="35" x2="285" y2="360"><stop stop-color="#ffe997"/><stop offset=".4" stop-color="#ad7320"/><stop offset=".65" stop-color="#efd06a"/><stop offset="1" stop-color="#85521a"/></linearGradient><radialGradient id="p2" cx=".35" cy=".25"><stop stop-color="#fff"/><stop offset=".55" stop-color="#f5e9e7"/><stop offset="1" stop-color="#c4abad"/></radialGradient></defs><path d="M62 74c24 118 59 176 118 211 59-35 94-93 118-211" fill="none" stroke="url(#g2)" stroke-width="5"/><circle cx="180" cy="281" r="54" fill="url(#p2)" stroke="url(#g2)" stroke-width="8"/><circle cx="180" cy="214" r="11" fill="#f4d06a" stroke="#9a631c" stroke-width="4"/></svg>`,
