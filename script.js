@@ -1,6 +1,6 @@
 const WHATSAPP_NUMBER = "51917578751";
 
-// Catálogo real de RyM. Los precios quedan pendientes de confirmación comercial.
+// Catálogo real de RyM. Los precios se coordinan de forma privada por WhatsApp.
 const products = [
   { id: 1, name: "Anillo Doble Hélice", category: "Anillos", detail: "Anillo", description: "Dos líneas entrelazadas que celebran conexión, equilibrio y elegancia.", price: 35, stock: "Disponible", image: "assets/products/anillos/anillo-doble-helice-2.jpeg", alt: "Anillo Doble Hélice dorado", bg: "#f2eee9" },
   { id: 2, name: "Anillo Flowersel", category: "Anillos", detail: "Anillo", description: "Una flor luminosa que aporta romanticismo y delicadeza a tus manos.", price: 35, stock: "Disponible", image: "assets/products/anillos/anillo-flowersel-1.jpeg", alt: "Anillo Flowersel dorado con diseño floral", bg: "#f3e8e7" },
@@ -19,7 +19,7 @@ const products = [
   { id: 13, name: "Collar Constelación", category: "Collares", detail: "Collar", description: "Pequeños destellos celestiales que iluminan el escote con elegancia sutil.", price: null, stock: "Disponible", image: "assets/products/collares/collar-constelacion-1.jpeg", alt: "Collar Constelación dorado", bg: "#f2eee9" },
   { id: 14, name: "Collar Estrella Brillante", category: "Collares", detail: "Collar", description: "Una estrella protagonista que aporta luz y encanto a cualquier ocasión.", price: null, stock: "Disponible", image: "assets/products/collares/collar-estrella-brillante-1.jpeg", alt: "Collar Estrella Brillante dorado", bg: "#f3e8e7" },
   { id: 15, name: "Collar Primeros Pasos", category: "Collares", detail: "Collar", description: "Un recuerdo tierno y significativo para celebrar los primeros momentos.", price: null, stock: "Disponible", image: "assets/products/collares/collar-primeros-pasos-1.jpeg", alt: "Collar Primeros Pasos dorado", bg: "#f4e4e5" },
-  { id: 16, name: "Rosario Edición Celestial", category: "Collares", detail: "Rosario", description: "Inspiración espiritual y detalles delicados en una pieza serena y especial.", price: null, stock: "Disponible", image: "assets/products/collares/rosario-edicion-celestial-1.jpeg", alt: "Rosario Edición Celestial dorado", bg: "#ece9e4" },
+  { id: 16, name: "Rosario Bendición Celestial", category: "Collares", detail: "Rosario", description: "Inspiración espiritual y detalles delicados en una pieza serena y especial.", price: null, stock: "Disponible", image: "assets/products/collares/rosario-edicion-celestial-1.jpeg", alt: "Rosario Bendición Celestial dorado", bg: "#ece9e4" },
 
   { id: 17, name: "Colibrí de Luz", category: "Dijes", detail: "Dije", description: "Un símbolo de alegría y esperanza que cobra vida con cada movimiento.", price: null, stock: "Disponible", image: "assets/products/dijes/colibri-de-luz-1.jpeg", alt: "Dije Colibrí de Luz dorado", bg: "#f2ebe5" },
   { id: 18, name: "Dije René", category: "Dijes", detail: "Dije", description: "Un pez dorado lleno de movimiento, carácter y un encanto singular.", price: null, stock: "Disponible", image: "assets/products/dijes/dije-rene-1.jpeg", alt: "Dije René dorado con forma de pez", bg: "#f1e9e2" },
@@ -41,6 +41,118 @@ const products = [
   { id: 31, name: "Joyero Glamour Pink", category: "Cofres", detail: "Joyero", description: "Un joyero amplio y delicado para organizar tus piezas con elegancia.", price: 20, stock: "Disponible", image: "assets/products/cofres/joyero-glamour-pink-1.jpeg", alt: "Joyero Glamour Pink abierto con compartimentos", bg: "#f4e4e5" },
   { id: 32, name: "Mini Joyero Glamour Shocking Pink", category: "Cofres", detail: "Mini joyero", description: "Formato compacto y vibrante para llevar tus joyas favoritas a todas partes.", price: 10, stock: "Disponible", image: "assets/products/cofres/mini-joyero-glamour-shocking-pink-1.jpeg", alt: "Mini Joyero Glamour Shocking Pink abierto", bg: "#f2ebe5" },
 ];
+
+const detailedDescriptions = {
+  1: [
+    "Este anillo es una verdadera joya de diseño. Presenta un patrón entrelazado y calado de inspiración retro en tono dorado, engastado con circonias de corte baguette y pequeños cristales que captan la luz de manera espectacular.",
+    "💍 Diseño regulable: su estructura ajustable se adapta cómodamente a distintos tamaños de dedo.",
+    "🛡️ Acero inoxidable de alta gama: resistente al agua y pensado para conservar su tono dorado y su brillo.",
+    "🌿 100% hipoalergénico: libre de níquel y plomo para cuidar las pieles sensibles.",
+    "🎁 Estuche incluido: presentado en un elegante estuche de terciopelo rojo, listo para regalar.",
+  ],
+  2: [
+    "Ilumina tus manos con este delicado anillo envolvente en espiral. Sus líneas entrelazadas con finas circonias culminan en una flor de cinco pétalos con cristales de corte marquesa.",
+    "✨ Baño de oro de alta calidad: un acabado dorado cálido creado para mantener su brillo radiante.",
+    "💍 Diseño regulable: su estructura abierta se adapta con comodidad a distintos tamaños de dedo.",
+    "🌿 100% hipoalergénico: elaborado con insumos libres de níquel y plomo.",
+    "🎁 Presentación de regalo: incluye un estuche rígido de terciopelo rojo.",
+    "🌸 El complemento ideal para aportar un toque femenino, refinado y luminoso a tu look.",
+  ],
+  3: [
+    "Destaca tu estilo con este anillo de diseño arquitectónico y geométrico. Su estructura ancha en tono dorado combina secciones triangulares de acabado espejo con franjas de finas circonias.",
+    "💍 Diseño regulable: su estructura ajustable se adapta cómodamente a la medida de tu dedo.",
+    "🛡️ Excelente calidad: elaborado con materiales de alta gama y un recubrimiento dorado premium.",
+    "🌿 100% hipoalergénico: libre de níquel y plomo para proteger las pieles sensibles.",
+    "🎁 Presentación especial: llega en un elegante estuche de terciopelo rojo, listo para regalar.",
+  ],
+  9: [
+    "“El toque final que eleva cualquier outfit.” 💫",
+    "Con el peso ideal y una textura impecable, la Cadena Cordón Imperial combina tradición y tendencia en una sola pieza. Destaca por su brillo dorado uniforme.",
+    "Elaborada en aleación hipoalergénica con baño de oro de 18K, libre de níquel y plomo.",
+  ],
+  10: [
+    "“El infaltable en tu joyero.” 💫",
+    "Diseñada para adaptarse a cualquier estilo, la Cadena Grumet Fina es la pieza clave para crear combinaciones en capas o llevar un look limpio y sofisticado.",
+    "Elaborada en aleación hipoalergénica con baño de oro de 18K, libre de níquel y plomo.",
+  ],
+  11: [
+    "“El básico imprescindible que nunca pasa de moda.” 💫",
+    "Eleva tu look diario con la Cadena Minimal Gold. Su tejido de finas esferas y barritas aporta textura y un brillo impecable a cualquier combinación.",
+    "Elaborada en aleación hipoalergénica con baño de oro de 18K, libre de níquel y plomo.",
+  ],
+  12: [
+    "“No importa el camino, sigue siempre la dirección de tus sueños.” 🧭✨",
+    "Nuestro Collar Brújula del Destino no solo es un accesorio moderno con broche T-bar, sino también un amuleto que te recuerda mantener siempre tu propio rumbo.",
+    "Elaborado en aleación hipoalergénica con baño de oro de 18K, libre de níquel y plomo.",
+  ],
+  13: [
+    "Inspirado en la magia del firmamento, el Collar Constelación destaca por su delicada cadena dorada salpicada de pequeñas estrellas. Un toque sutil de brillo y sofisticación para tu día a día. 🌠",
+    "Elaborado en aleación hipoalergénica con baño de oro de 18K, libre de níquel y plomo.",
+  ],
+  14: [
+    "✨ “Nunca dejes de brillar.” ✨",
+    "Combina la magia de las estrellas con la pureza del circón en una sola joya.",
+    "Elaborado en aleación hipoalergénica con baño de oro de 18K, libre de níquel y plomo.",
+  ],
+  15: [
+    "👣 “La huella más grande es la que dejas en el corazón.” ✨",
+    "Lleva el amor de tu vida cerca de ti con nuestro Collar Primeros Pasos.",
+    "Elaborado en aleación hipoalergénica con baño de oro de 18K, libre de níquel y plomo.",
+  ],
+  16: [
+    "“La fe no hace que las cosas sean fáciles, las hace posibles.” 🕊️✨",
+    "Lleva contigo la presencia y protección divina en un diseño sofisticado tipo corbatín con una delicada medalla de la Virgen María.",
+    "Elaborado en aleación hipoalergénica con baño de oro de 18K, libre de níquel y plomo.",
+  ],
+  25: [
+    "Luce la elegancia minimalista en su máxima expresión con nuestro brazalete rígido de acabado pulido a espejo. Su diseño liso y estilizado abraza la muñeca con un brillo refinado, perfecto para usar solo o combinar con otras pulseras.",
+    "🛡️ Acero inoxidable de alta gama: resistente al agua, al sudor y al paso del tiempo, sin oxidarse ni manchar la piel.",
+    "🌿 100% hipoalergénico: libre de níquel y plomo, seguro incluso para pieles sensibles.",
+  ],
+  26: [
+    "¡El toque dorado que te faltaba! ✨💛",
+    "Luce impecable con este brazalete rígido de textura labrada y acabados de esfera. Un accesorio moderno, cómodo y lleno de presencia.",
+    "🛡️ Acero inoxidable: resistente al agua, al sudor y al paso del tiempo; no se oxida ni pierde su color.",
+    "🌿 100% hipoalergénico: libre de níquel y plomo, ideal para pieles sensibles.",
+    "✨ Ajuste perfecto: su diseño abierto permite colocarlo y adaptarlo a la muñeca con comodidad.",
+  ],
+  27: [
+    "Más que una pulsera, es una experiencia de regalo. Esta pieza dorada con tres peces esmaltados en rosa y lila se presenta en una caja de textura elegante con lazo negro y un interior de terciopelo que realza sus colores.",
+    "🐠🎀 Lista para entregar y sorprender con un detalle único.",
+    "🌿 Libre de níquel y plomo, pensada para cuidar las pieles sensibles.",
+  ],
+  28: [
+    "¿Buscas el regalo perfecto para alguien especial o un detalle para ti? Esta delicada pulsera de cadena dorada se distingue por sus encantadores dijes de peces rojos. ❤️",
+    "💛 Baño de oro de alta calidad.",
+    "🛡️ Diseño hipoalergénico.",
+    "✨ Brillo duradero para acompañarte cada día.",
+  ],
+  29: [
+    "Añade un toque sofisticado y romántico a tu colección con esta pulsera de balines pulidos a espejo en tono dorado. Sus dos corazones y una estrella de efecto volumétrico reflejan la luz con cada movimiento.",
+    "🛡️ Calidad de alta gama: elaborada con material resistente y un recubrimiento dorado de alta calidad para conservar su brillo.",
+    "🌿 100% hipoalergénica: libre de níquel y plomo, ideal para pieles sensibles.",
+    "✨ Acabado fino: pulido suave al tacto y una elegante medallita lisa en la extensión del cierre.",
+  ],
+  30: [
+    "Siente la frescura de la primavera en tu muñeca con esta pulsera dorada decorada con tres flores rosa y un cristal central que destella con la luz.",
+    "🌸 Diseño exclusivo: flores esmaltadas en rosa con circonia cúbica incrustada al centro.",
+    "🛡️ Material de alta gama: cadena dorada resistente, hipoalergénica y libre de níquel y plomo.",
+    "✨ Resistente a la oxidación: creada para mantener su brillo y hermoso color.",
+  ],
+  31: [
+    "Tus joyas favoritas merecen un lugar tan especial y brillante como ellas. Este joyero permite mantener anillos, aretes y dijes organizados con la elegancia del terciopelo rosa y una vista panorámica impecable.",
+    "Protege y organiza tu brillo todos los días. ✨",
+  ],
+  32: [
+    "El toque de delicadeza y elegancia que tu tocador estaba esperando. 🌸",
+    "Dale a tu colección el hogar perfecto: suave por dentro, sofisticado por fuera y diseñado para resaltar la belleza de cada pieza.",
+  ],
+};
+
+products.forEach((product) => {
+  product.stock = "Última pieza";
+  product.longDescription = detailedDescriptions[product.id] || [product.description];
+});
 
 const galleryCounts = {
   1: 3, 2: 3, 3: 3, 4: 2, 5: 1, 6: 1, 7: 1, 8: 1,
@@ -185,12 +297,8 @@ const artTemplates = {
   medallion: `<svg viewBox="0 0 360 420" aria-hidden="true"><defs><linearGradient id="g8" x1="60" y1="40" x2="300" y2="350"><stop stop-color="#ffed9f"/><stop offset=".35" stop-color="#ab701e"/><stop offset=".65" stop-color="#f3d477"/><stop offset="1" stop-color="#895619"/></linearGradient></defs><path d="M58 65c27 129 65 190 122 223 57-33 95-94 122-223" fill="none" stroke="url(#g8)" stroke-width="5"/><circle cx="180" cy="288" r="60" fill="url(#g8)"/><circle cx="180" cy="288" r="48" fill="#d4a44e" stroke="#ffe89c" stroke-width="3"/><path d="M180 258c-19 11-29 26-29 43 11-4 21-3 29 7 8-10 18-11 29-7 0-17-10-32-29-43z" fill="#efd17b" opacity=".85"/><circle cx="180" cy="215" r="10" fill="#f4d06e" stroke="#95601b" stroke-width="4"/></svg>`,
 };
 
-const hasPrice = (product) => Number.isFinite(product.price);
-const formatPrice = (price) => Number.isFinite(price) ? `S/ ${price.toFixed(2)}` : "Consultar";
-
 function whatsappUrl(product) {
-  const priceText = hasPrice(product) ? ` por ${formatPrice(product.price)}` : "";
-  const message = `Hola RyM, deseo adquirir ${product.name}, que vi en su catálogo${priceText}. Estado: ${product.stock}. ¿Podrían brindarme más información?`;
+  const message = `Hola RyM, deseo adquirir ${product.name}, que vi en su catálogo. Estado: ${product.stock}. ¿Podrían brindarme más información?`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
@@ -221,9 +329,9 @@ function productCard(product) {
             <h3 class="product-card__name"><a href="producto.html?id=${product.id}">${product.name}</a></h3>
             <p class="product-card__type">${product.detail}</p>
           </div>
-          <p class="product-card__price">${formatPrice(product.price)}</p>
         </div>
         <p class="product-card__description">${product.description}</p>
+        <a class="product-card__details" href="producto.html?id=${product.id}">Ver detalles <span aria-hidden="true">→</span></a>
         <div class="product-card__actions">
           <button class="product-card__action" type="button" data-product-id="${product.id}" ${soldOut ? "disabled" : ""}>
             <span>${soldOut ? "Temporalmente agotado" : "Consultar por WhatsApp"}</span>
@@ -257,7 +365,6 @@ grid.addEventListener("click", (event) => {
 const bagOverlay = document.querySelector("[data-bag-overlay]");
 const bagContent = document.querySelector("[data-bag-content]");
 const bagFooter = document.querySelector("[data-bag-footer]");
-const bagTotal = document.querySelector("[data-bag-total]");
 const bagWhatsapp = document.querySelector("[data-bag-whatsapp]");
 const bagOpenButtons = document.querySelectorAll("[data-bag-open]");
 const bagCountElements = document.querySelectorAll("[data-bag-count]");
@@ -283,11 +390,8 @@ function saveBag() {
 }
 
 function bagWhatsappUrl(selectedProducts) {
-  const lines = selectedProducts.map((product) => `• ${product.name} — ${formatPrice(product.price)} (${product.stock})`);
-  const pricedProducts = selectedProducts.filter(hasPrice);
-  const total = pricedProducts.reduce((sum, product) => sum + product.price, 0);
-  const totalText = pricedProducts.length === selectedProducts.length ? `\n\nTotal referencial: ${formatPrice(total)}.` : "";
-  const message = `Hola RyM, deseo consultar por estas piezas de mi cartera:\n\n${lines.join("\n")}${totalText}\n\n¿Podrían confirmarme precios, disponibilidad y entrega?`;
+  const lines = selectedProducts.map((product) => `• ${product.name} (${product.stock})`);
+  const message = `Hola RyM, deseo consultar por estas piezas de mi cartera:\n\n${lines.join("\n")}\n\n¿Podrían confirmarme disponibilidad, detalles y entrega?`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
@@ -324,13 +428,10 @@ function renderBag() {
   bagContent.innerHTML = selectedProducts.map((product) => `
     <article class="bag-item">
       <img src="${product.image}" alt="${product.alt || product.name}" width="82" height="103" decoding="async">
-      <div><h3>${product.name}</h3><p>${product.stock}</p><strong>${formatPrice(product.price)}</strong></div>
+      <div><h3>${product.name}</h3><p>${product.stock}</p></div>
       <button class="bag-item__remove" type="button" data-remove-product-id="${product.id}" aria-label="Quitar ${product.name} de mi cartera">×</button>
     </article>`).join("");
 
-  const pricedProducts = selectedProducts.filter(hasPrice);
-  const total = pricedProducts.reduce((sum, product) => sum + product.price, 0);
-  bagTotal.textContent = pricedProducts.length === selectedProducts.length ? formatPrice(total) : "Por confirmar";
   bagWhatsapp.href = bagWhatsappUrl(selectedProducts);
   bagFooter.hidden = false;
 }

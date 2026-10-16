@@ -33,8 +33,9 @@ Los productos están centralizados en el arreglo `products` de `script.js`. Cada
 - `name`: nombre visible.
 - `category`: `Anillos`, `Aretes`, `Cofres`, `Collares`, `Dijes`, `Dijes + Aretes` o `Pulseras`.
 - `detail`: material o descripción breve.
-- `description`: frase comercial breve y específica de la pieza.
-- `price`: número en soles; usa `null` mientras el precio esté pendiente y el sitio mostrará `Consultar`.
+- `description`: frase comercial breve utilizada en la tarjeta del catálogo.
+- `longDescription`: contenido ampliado que se muestra únicamente en la ficha del producto.
+- `price`: dato interno opcional; la interfaz pública no muestra precios y deriva la consulta a WhatsApp.
 - `stock`: texto visible de disponibilidad.
 - `image`: ruta a la fotografía principal del producto.
 - `bg`: fondo de la tarjeta.
@@ -47,7 +48,9 @@ Las portadas de la sección de colecciones alternan fotografías reales de su mi
 
 El número de WhatsApp se configura una sola vez en `WHATSAPP_NUMBER`.
 
-Antes del lanzamiento, sustituye también el enlace genérico de Instagram en `index.html` por el perfil oficial de la marca.
+Los enlaces oficiales de Instagram y TikTok se configuran directamente en el footer de `index.html`.
+
+La imagen social general se encuentra en `assets/images/rym-social-share.jpg`. Cuando se defina el dominio final, las etiquetas `og:image` deben actualizarse con su URL absoluta para lograr la máxima compatibilidad con WhatsApp y otros rastreadores.
 
 Para un modelo 3D, carga `<model-viewer>` solo al abrir el detalle del producto y sirve archivos GLB comprimidos con Draco/KTX2. Así el catálogo inicial no descarga geometría innecesaria.
 

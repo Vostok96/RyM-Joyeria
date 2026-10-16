@@ -26,14 +26,17 @@ if (!product) {
   document.querySelector("[data-breadcrumb-product]").textContent = product.name;
   document.querySelector("[data-product-category]").textContent = product.category;
   document.querySelector("[data-product-name]").textContent = product.name;
-  document.querySelector("[data-product-description]").textContent = product.description;
+  const description = document.querySelector("[data-product-description]");
+  description.replaceChildren(...product.longDescription.map((copy, index) => {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = copy;
+    if (index === 0) paragraph.classList.add("product-detail__lead");
+    return paragraph;
+  }));
   document.querySelector("[data-product-type]").textContent = product.detail;
   document.querySelector("[data-product-stock]").textContent = product.stock;
-  document.querySelector("[data-product-price]").textContent = Number.isFinite(product.price)
-    ? `S/ ${product.price.toFixed(2)}`
-    : "Consultar";
 
-  const whatsappMessage = `Hola RyM, deseo recibir más información sobre ${product.name}. Estado: ${product.stock}. ¿Podrían confirmarme precio y entrega?`;
+  const whatsappMessage = `Hola RyM, deseo recibir más información sobre ${product.name}. Estado: ${product.stock}. ¿Podrían confirmarme sus detalles y entrega?`;
   document.querySelector("[data-product-whatsapp]").href = `https://wa.me/${PRODUCT_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
   document.title = `${product.name} | RyM`;
