@@ -2,6 +2,8 @@
 
 Sitio web responsive para el catálogo de accesorios RyM, diseñado con una dirección visual editorial, carga ligera y consulta directa por WhatsApp.
 
+Dominio oficial: [rymgroup.org](https://rymgroup.org/)
+
 El catálogo contiene 32 productos reales organizados en Anillos, Aretes, Cofres, Collares, Dijes, Dijes + Aretes y Pulseras. Sus fotografías están en `assets/products/`, separadas por categoría.
 
 ## Ejecutar localmente
@@ -50,7 +52,7 @@ El número de WhatsApp se configura una sola vez en `WHATSAPP_NUMBER`.
 
 Los enlaces oficiales de Instagram y TikTok se configuran directamente en el footer de `index.html`.
 
-La imagen social general se encuentra en `assets/images/rym-social-share.jpg`. Cuando se defina el dominio final, las etiquetas `og:image` deben actualizarse con su URL absoluta para lograr la máxima compatibilidad con WhatsApp y otros rastreadores.
+La imagen social general se encuentra en `assets/images/rym-social-share.jpg` y sus etiquetas públicas utilizan la URL absoluta del dominio oficial para lograr compatibilidad con WhatsApp y otros rastreadores.
 
 Para un modelo 3D, carga `<model-viewer>` solo al abrir el detalle del producto y sirve archivos GLB comprimidos con Draco/KTX2. Así el catálogo inicial no descarga geometría innecesaria.
 

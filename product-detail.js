@@ -43,7 +43,25 @@ if (!product) {
   document.querySelector('meta[name="description"]').content = product.description;
   document.querySelector('meta[property="og:title"]').content = `${product.name} | RyM`;
   document.querySelector('meta[property="og:description"]').content = product.description;
-  document.querySelector('meta[property="og:image"]').content = new URL(images[0], window.location.href).href;
+  const canonicalUrl = `https://rymgroup.org/producto.html?id=${product.id}`;
+  const socialImage = new URL(images[0], "https://rymgroup.org/").href;
+  document.querySelector('link[rel="canonical"]').href = canonicalUrl;
+  document.querySelector('meta[property="og:url"]').content = canonicalUrl;
+  document.querySelector('meta[property="og:image"]').content = socialImage;
+  document.querySelector('meta[name="twitter:title"]').content = `${product.name} | RyM`;
+  document.querySelector('meta[name="twitter:description"]').content = product.description;
+  document.querySelector('meta[name="twitter:image"]').content = socialImage;
+  document.getElementById("product-schema").textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: images.map((image) => new URL(image, "https://rymgroup.org/").href),
+    sku: `RYM-${String(product.id).padStart(3, "0")}`,
+    category: product.category,
+    brand: { "@type": "Brand", name: "RyM" },
+    url: canonicalUrl
+  });
 
   thumbnails.innerHTML = images.map((image, index) => `
     <button class="product-gallery__thumb" type="button" data-gallery-index="${index}" aria-label="Ver imagen ${index + 1} de ${images.length}">
