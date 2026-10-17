@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rymgroup.org/sitemap.xml
+Sitemap: https://joyeria.rymgroup.org/sitemap.xml

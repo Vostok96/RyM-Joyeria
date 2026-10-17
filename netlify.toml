@@ -3,7 +3,13 @@
 
 [[redirects]]
   from = "https://www.rymgroup.org/*"
-  to = "https://rymgroup.org/:splat"
+  to = "https://joyeria.rymgroup.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://rymgroup.org/*"
+  to = "https://joyeria.rymgroup.org/:splat"
   status = 301
   force = true
 

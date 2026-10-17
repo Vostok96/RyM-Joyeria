@@ -2,7 +2,7 @@
 
 Sitio web responsive para el catálogo de accesorios RyM, diseñado con una dirección visual editorial, carga ligera y consulta directa por WhatsApp.
 
-Dominio oficial: [rymgroup.org](https://rymgroup.org/)
+Dominio oficial: [joyeria.rymgroup.org](https://joyeria.rymgroup.org/)
 
 El catálogo contiene 32 productos reales organizados en Anillos, Aretes, Cofres, Collares, Dijes, Dijes + Aretes y Pulseras. Sus fotografías están en `assets/products/`, separadas por categoría.
 

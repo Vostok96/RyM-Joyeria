@@ -43,8 +43,8 @@ if (!product) {
   document.querySelector('meta[name="description"]').content = product.description;
   document.querySelector('meta[property="og:title"]').content = `${product.name} | RyM`;
   document.querySelector('meta[property="og:description"]').content = product.description;
-  const canonicalUrl = `https://rymgroup.org/producto.html?id=${product.id}`;
-  const socialImage = new URL(images[0], "https://rymgroup.org/").href;
+  const canonicalUrl = `https://joyeria.rymgroup.org/producto.html?id=${product.id}`;
+  const socialImage = new URL(images[0], "https://joyeria.rymgroup.org/").href;
   document.querySelector('link[rel="canonical"]').href = canonicalUrl;
   document.querySelector('meta[property="og:url"]').content = canonicalUrl;
   document.querySelector('meta[property="og:image"]').content = socialImage;
@@ -56,7 +56,7 @@ if (!product) {
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: images.map((image) => new URL(image, "https://rymgroup.org/").href),
+    image: images.map((image) => new URL(image, "https://joyeria.rymgroup.org/").href),
     sku: `RYM-${String(product.id).padStart(3, "0")}`,
     category: product.category,
     brand: { "@type": "Brand", name: "RyM" },
