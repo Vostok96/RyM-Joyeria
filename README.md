@@ -37,7 +37,7 @@ Los productos están centralizados en el arreglo `products` de `script.js`. Cada
 - `detail`: material o descripción breve.
 - `description`: frase comercial breve utilizada en la tarjeta del catálogo.
 - `longDescription`: contenido ampliado que se muestra únicamente en la ficha del producto.
-- `price`: dato interno opcional; la interfaz pública no muestra precios y deriva la consulta a WhatsApp.
+- `price`: número en soles. Este mismo valor se muestra en la web y se utiliza al generar el catálogo PDF descargable.
 - `stock`: texto visible de disponibilidad.
 - `image`: ruta a la fotografía principal del producto.
 - `bg`: fondo de la tarjeta.
@@ -53,6 +53,8 @@ El número de WhatsApp se configura una sola vez en `WHATSAPP_NUMBER`.
 Los enlaces oficiales de Instagram y TikTok se configuran directamente en el footer de `index.html`.
 
 La imagen social general se encuentra en `assets/images/rym-social-share.jpg` y sus etiquetas públicas utilizan la URL absoluta del dominio oficial para lograr compatibilidad con WhatsApp y otros rastreadores.
+
+El botón “Descargar catálogo PDF” construye el documento directamente en el navegador a partir de `window.RYM_PRODUCTS`. Por eso, cualquier cambio de nombre, descripción, fotografía o precio realizado en `script.js` se refleja también en la siguiente descarga sin mantener un segundo catálogo manual.
 
 Para un modelo 3D, carga `<model-viewer>` solo al abrir el detalle del producto y sirve archivos GLB comprimidos con Draco/KTX2. Así el catálogo inicial no descarga geometría innecesaria.
 

@@ -33,8 +33,9 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261016-2" />
-    <script src="script.js?v=20261016" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261019" />
+    <script src="script.js?v=20261019" defer></script>
+    <script src="catalog-pdf.js?v=20261019" defer></script>
     <title>RyM | Calidad en cada detalle</title>
     <script type="application/ld+json">
       {
@@ -265,15 +266,27 @@
               <p class="eyebrow">Piezas seleccionadas</p>
               <h2 id="catalog-title">El catálogo</h2>
             </div>
-            <div class="filters" role="group" aria-label="Filtrar catálogo">
-              <button class="filter is-active" type="button" data-filter="Todos" aria-pressed="true">Todos</button>
-              <button class="filter" type="button" data-filter="Anillos" aria-pressed="false">Anillos</button>
-              <button class="filter" type="button" data-filter="Collares" aria-pressed="false">Collares</button>
-              <button class="filter" type="button" data-filter="Dijes" aria-pressed="false">Dijes</button>
-              <button class="filter" type="button" data-filter="Pulseras" aria-pressed="false">Pulseras</button>
-              <button class="filter" type="button" data-filter="Aretes" aria-pressed="false">Aretes</button>
-              <button class="filter" type="button" data-filter="Dijes + Aretes" aria-pressed="false">Dijes + Aretes</button>
-              <button class="filter" type="button" data-filter="Cofres" aria-pressed="false">Cofres</button>
+            <div class="catalog__tools">
+              <button class="catalog-download" type="button" data-catalog-download aria-describedby="catalog-download-status">
+                <span class="catalog-download__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19.5h16" /></svg>
+                </span>
+                <span class="catalog-download__copy">
+                  <strong>Descargar catálogo PDF</strong>
+                  <small>Precios y colección actualizados</small>
+                </span>
+              </button>
+              <p class="catalog-download__status" id="catalog-download-status" data-catalog-download-status aria-live="polite"></p>
+              <div class="filters" role="group" aria-label="Filtrar catálogo">
+                <button class="filter is-active" type="button" data-filter="Todos" aria-pressed="true">Todos</button>
+                <button class="filter" type="button" data-filter="Anillos" aria-pressed="false">Anillos</button>
+                <button class="filter" type="button" data-filter="Collares" aria-pressed="false">Collares</button>
+                <button class="filter" type="button" data-filter="Dijes" aria-pressed="false">Dijes</button>
+                <button class="filter" type="button" data-filter="Pulseras" aria-pressed="false">Pulseras</button>
+                <button class="filter" type="button" data-filter="Aretes" aria-pressed="false">Aretes</button>
+                <button class="filter" type="button" data-filter="Dijes + Aretes" aria-pressed="false">Dijes + Aretes</button>
+                <button class="filter" type="button" data-filter="Cofres" aria-pressed="false">Cofres</button>
+              </div>
             </div>
           </div>
 
@@ -456,6 +469,7 @@
         </div>
         <div class="bag-drawer__content" data-bag-content></div>
         <div class="bag-drawer__footer" data-bag-footer hidden>
+          <div class="bag-drawer__total"><span>Total referencial</span><strong data-bag-total>S/ 0.00</strong></div>
           <a class="button button--dark bag-drawer__whatsapp" data-bag-whatsapp href="https://wa.me/51917578751" target="_blank" rel="noopener noreferrer">Consultar selección por WhatsApp <span aria-hidden="true">↗</span></a>
           <p>La disponibilidad y entrega se confirman personalmente por WhatsApp.</p>
         </div>

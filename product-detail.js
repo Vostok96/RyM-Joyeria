@@ -35,8 +35,12 @@ if (!product) {
   }));
   document.querySelector("[data-product-type]").textContent = product.detail;
   document.querySelector("[data-product-stock]").textContent = product.stock;
+  document.querySelector("[data-product-price]").textContent = Number.isFinite(product.price)
+    ? `S/ ${product.price.toFixed(2)}`
+    : "Consultar";
 
-  const whatsappMessage = `Hola RyM, deseo recibir más información sobre ${product.name}. Estado: ${product.stock}. ¿Podrían confirmarme sus detalles y entrega?`;
+  const displayedPrice = Number.isFinite(product.price) ? `S/ ${product.price.toFixed(2)}` : "por confirmar";
+  const whatsappMessage = `Hola RyM, deseo recibir más información sobre ${product.name}, publicado a ${displayedPrice}. Estado: ${product.stock}. ¿Podrían confirmarme disponibilidad y entrega?`;
   document.querySelector("[data-product-whatsapp]").href = `https://wa.me/${PRODUCT_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
   document.title = `${product.name} | RyM`;
@@ -60,7 +64,14 @@ if (!product) {
     sku: `RYM-${String(product.id).padStart(3, "0")}`,
     category: product.category,
     brand: { "@type": "Brand", name: "RyM" },
-    url: canonicalUrl
+    url: canonicalUrl,
+    offers: Number.isFinite(product.price) ? {
+      "@type": "Offer",
+      priceCurrency: "PEN",
+      price: product.price.toFixed(2),
+      availability: product.stock === "Agotado" ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+      url: canonicalUrl,
+    } : undefined,
   });
 
   thumbnails.innerHTML = images.map((image, index) => `
