@@ -2,12 +2,62 @@ import { createHash, timingSafeEqual } from "node:crypto";
 import { getStore } from "@netlify/blobs";
 import { catalogDefaults, normalizeInventory } from "./_shared/catalog-defaults.mjs";
 
-const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || "f4cbc51239b7a1fd4925049d54cfa2319b263dd301cff5a07d40fff7f455b5fc";
+const DEFAULT_ADMIN_HASH = "d687620ec1b0fed6ca9af9a5f57399996b2d2b0c70e767ff05913529d638ce71";
+const ADMIN_PASSWORD_HASH = (process.env.ADMIN_PASSWORD_HASH || DEFAULT_ADMIN_HASH).trim().toLowerCase();
 const jsonHeaders = { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" };
+
+function getClientIpKey(request) {
+  const ip =
+    request.headers.get("x-nf-client-connection-ip") ||
+    request.headers.get("client-ip") ||
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown";
+  return ip === "unknown" ? "unknown" : createHash("sha256").update(ip).digest("hex").slice(0, 24);
+}
+
+async function isLockedOut(ipKey, secStore) {
+  if (ipKey === "unknown") return false;
+  try {
+    const record = await secStore.get(`lockout/${ipKey}`, { type: "json" });
+    if (record && record.lockedUntil && record.lockedUntil > Date.now()) {
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+async function recordFailure(ipKey, secStore) {
+  if (ipKey === "unknown") return;
+  try {
+    const now = Date.now();
+    const record = (await secStore.get(`lockout/${ipKey}`, { type: "json" })) || { attempts: 0, firstAttempt: now };
+    if (now - (record.firstAttempt || now) > 10 * 60 * 1000) {
+      record.attempts = 1;
+      record.firstAttempt = now;
+      record.lockedUntil = 0;
+    } else {
+      record.attempts = (record.attempts || 0) + 1;
+    }
+    if (record.attempts >= 5) {
+      record.lockedUntil = now + 15 * 60 * 1000;
+    }
+    await secStore.setJSON(`lockout/${ipKey}`, record);
+  } catch {}
+}
+
+async function resetFailure(ipKey, secStore) {
+  if (ipKey === "unknown") return;
+  try {
+    await secStore.delete(`lockout/${ipKey}`);
+  } catch {}
+}
 
 function isAuthorized(request) {
   const authorization = request.headers.get("authorization") || "";
   const password = authorization.startsWith("Bearer ") ? authorization.slice(7) : "";
+  if (!password) return false;
   const received = Buffer.from(createHash("sha256").update(password).digest("hex"));
   const expected = Buffer.from(ADMIN_PASSWORD_HASH);
   return received.length === expected.length && timingSafeEqual(received, expected);
@@ -163,9 +213,22 @@ async function readDashboard() {
 }
 
 export default async (request) => {
-  if (!isAuthorized(request)) {
-    return Response.json({ error: "Acceso no autorizado" }, { status: 401, headers: jsonHeaders });
+  const secStore = getStore("rym-security");
+  const ipKey = getClientIpKey(request);
+
+  if (await isLockedOut(ipKey, secStore)) {
+    return Response.json(
+      { error: "Demasiados intentos fallidos. Acceso bloqueado temporalmente por 15 minutos." },
+      { status: 429, headers: jsonHeaders }
+    );
   }
+
+  if (!isAuthorized(request)) {
+    await recordFailure(ipKey, secStore);
+    return Response.json({ error: "Clave de acceso incorrecta" }, { status: 401, headers: jsonHeaders });
+  }
+
+  resetFailure(ipKey, secStore).catch(() => {});
 
   try {
     if (request.method === "GET") {

@@ -22,6 +22,11 @@ export default async (request) => {
     return new Response(null, { status: 405, headers: { Allow: "POST" } });
   }
 
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > 4096) {
+    return Response.json({ error: "Payload excesivo" }, { status: 413 });
+  }
+
   try {
     const body = await request.json();
     const event = cleanText(body.event, 40);
