@@ -288,7 +288,8 @@ function drawClosingPage(document) {
 }
 
 async function generateCatalogPdf() {
-  const products = window.RYM_PRODUCTS || [];
+  await (window.RYM_CATALOG_READY || Promise.resolve());
+  const products = (window.RYM_PRODUCTS || []).filter((product) => product.visible !== false);
   if (!products.length) throw new Error("El catálogo todavía no está disponible.");
 
   setCatalogStatus("Preparando el generador...");

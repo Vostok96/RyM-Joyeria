@@ -8,13 +8,14 @@ El catálogo contiene 32 productos reales organizados en Anillos, Aretes, Cofres
 
 ## Ejecutar localmente
 
-No requiere instalación ni proceso de compilación. Puedes abrir `index.html` directamente o levantar un servidor estático:
+Instala las dependencias y levanta Netlify Dev para incluir las funciones de catálogo, analítica y administración:
 
 ```powershell
-python -m http.server 4173
+pnpm install
+pnpm dlx netlify-cli dev
 ```
 
-Luego visita `http://localhost:4173`.
+Luego visita la dirección local indicada por Netlify Dev.
 
 ## Desplegar en Netlify
 
@@ -24,13 +25,27 @@ El repositorio está listo para importarse directamente en Netlify:
 - Publish directory: `.`
 - Branch de producción: `main`.
 
-`netlify.toml` ya incluye la configuración de publicación, cabeceras de seguridad y caché de imágenes.
+`netlify.toml` ya incluye la configuración de publicación, funciones, rutas de API, cabeceras de seguridad y caché de imágenes.
 
 Los archivos CSS y JavaScript usan revalidación inmediata para que los cambios publicados no queden retenidos en dispositivos que visitaron una versión anterior. Las referencias desde los archivos HTML incluyen además un parámetro de versión para invalidar la caché heredada. Las fotografías de productos se revalidan después de una hora; los recursos de marca que no cambian conservan una caché prolongada.
 
+## Panel de administración
+
+El cliente puede administrar el catálogo desde `/admin/`. El panel permite:
+
+- Cambiar precios y cantidades.
+- Ocultar o volver a mostrar productos.
+- Consultar vistas, sesiones, productos más vistos, clics a WhatsApp, descargas del PDF y dispositivos durante los últimos 30 días.
+
+La disponibilidad se calcula automáticamente: cantidad `0` muestra “Agotado”, cantidad `1` muestra “Última pieza” y cantidades mayores muestran “Disponible”. Los cambios se guardan en Netlify Blobs y se reflejan tanto en la web como en el PDF descargable.
+
+La contraseña no se guarda en texto visible: la función compara su hash SHA-256. Para rotarla, reemplaza `ADMIN_PASSWORD_HASH` en `netlify/functions/admin.mjs` por el SHA-256 de la nueva contraseña. No incluyas la contraseña original en el repositorio.
+
+La analítica es propia y anónima. No guarda nombres, correos ni direcciones IP; comienza a acumular datos a partir del primer despliegue que incluya esta funcionalidad.
+
 ## Actualizar el catálogo
 
-Los productos están centralizados en el arreglo `products` de `script.js`. Cada producto contiene:
+Los datos base de los productos están centralizados en el arreglo `products` de `script.js`. Precios, cantidades y visibilidad se administran desde `/admin/`; si la API no está disponible, la web conserva estos valores base como respaldo. Cada producto contiene:
 
 - `name`: nombre visible.
 - `category`: `Anillos`, `Aretes`, `Cofres`, `Collares`, `Dijes`, `Dijes + Aretes` o `Pulseras`.
@@ -68,7 +83,11 @@ RyM-Joyeria/
 ├── product.css        # presentación responsive de la ficha
 ├── script.js          # productos, galerías, filtros y WhatsApp
 ├── product-detail.js  # carrusel y contenido de cada ficha
+├── analytics.js       # medición anónima de navegación y conversiones
+├── admin/             # panel privado de inventario y estadísticas
+├── netlify/functions/ # API de catálogo, inventario y analítica
 ├── netlify.toml       # configuración de despliegue y caché
+├── package.json       # dependencia de almacenamiento Netlify Blobs
 ├── assets/            # fotografías reales de los productos
 └── README.md          # guía rápida de mantenimiento
 ```

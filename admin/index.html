@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#fff1f5" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="admin.css?v=20261019" />
+    <script src="admin.js?v=20261019" defer></script>
+    <title>Panel de catálogo | RyM</title>
+  </head>
+  <body>
+    <header class="admin-header">
+      <a class="brand" href="../" aria-label="Volver a la tienda RyM">
+        <strong>RyM</strong>
+        <span>Gestión del catálogo</span>
+      </a>
+      <a href="../" target="_blank" rel="noopener">Ver tienda <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="login-card" data-login>
+        <p class="eyebrow">Acceso privado</p>
+        <h1>Panel RyM</h1>
+        <p>Ingresa la clave administrativa para revisar estadísticas y actualizar el inventario.</p>
+        <form data-login-form>
+          <label for="admin-password">Clave de acceso</label>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required />
+          <button type="submit">Ingresar</button>
+        </form>
+        <p class="status" data-login-status role="status"></p>
+      </section>
+
+      <section class="dashboard" data-dashboard hidden>
+        <div class="dashboard-heading">
+          <div>
+            <p class="eyebrow">Últimos 30 días</p>
+            <h1>Resumen de la tienda</h1>
+          </div>
+          <div class="heading-actions">
+            <button class="button-secondary" type="button" data-refresh>Actualizar</button>
+            <button class="button-secondary" type="button" data-logout>Cerrar sesión</button>
+          </div>
+        </div>
+
+        <div class="metrics" data-metrics></div>
+
+        <div class="insights-grid">
+          <article class="panel">
+            <div class="panel-heading"><h2>Productos más vistos</h2><span>Visitas a fichas</span></div>
+            <div class="ranking" data-top-products></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><h2>Vistas por día</h2><span>Últimos 30 días</span></div>
+            <div class="bars" data-daily></div>
+          </article>
+          <article class="panel panel--small">
+            <div class="panel-heading"><h2>Dispositivos</h2></div>
+            <div class="list" data-devices></div>
+          </article>
+          <article class="panel panel--small">
+            <div class="panel-heading"><h2>Origen del tráfico</h2></div>
+            <div class="list" data-sources></div>
+          </article>
+        </div>
+
+        <section class="inventory-section">
+          <div class="inventory-heading">
+            <div>
+              <p class="eyebrow">Edición rápida</p>
+              <h2>Inventario y precios</h2>
+              <p>0 unidades marca agotado, 1 unidad muestra última pieza y 2 o más muestra disponible.</p>
+            </div>
+            <button type="button" data-save>Guardar cambios</button>
+          </div>
+          <p class="status" data-save-status role="status"></p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Producto</th><th>Categoría</th><th>Precio (S/)</th><th>Unidades</th><th>Estado</th><th>Visible</th></tr></thead>
+              <tbody data-inventory></tbody>
+            </table>
+          </div>
+          <p class="updated" data-updated></p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

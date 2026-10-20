@@ -151,6 +151,8 @@ const detailedDescriptions = {
 
 products.forEach((product) => {
   product.stock = "Última pieza";
+  product.quantity = 1;
+  product.visible = true;
   product.longDescription = detailedDescriptions[product.id] || [product.description];
 });
 
@@ -172,6 +174,42 @@ products.forEach((product) => {
 
 window.RYM_PRODUCTS = products;
 
+async function loadCatalogInventory() {
+  try {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 3500);
+    const response = await fetch("/api/catalog", {
+      headers: { Accept: "application/json" },
+      cache: "no-store",
+      signal: controller.signal,
+    });
+    window.clearTimeout(timeoutId);
+    if (!response.ok) throw new Error(`Inventario no disponible (${response.status})`);
+
+    const payload = await response.json();
+    const inventory = Array.isArray(payload.products) ? payload.products : [];
+    const inventoryById = new Map(inventory.map((item) => [Number(item.id), item]));
+
+    products.forEach((product) => {
+      const current = inventoryById.get(product.id);
+      if (!current) return;
+      if (Number.isFinite(Number(current.price)) && Number(current.price) >= 0) product.price = Number(current.price);
+      if (Number.isInteger(Number(current.quantity)) && Number(current.quantity) >= 0) product.quantity = Number(current.quantity);
+      if (["Disponible", "Última pieza", "Agotado"].includes(current.stock)) product.stock = current.stock;
+      product.visible = current.visible !== false;
+    });
+  } catch (error) {
+    console.warn("Se usó el inventario de respaldo.", error);
+  }
+
+  window.RYM_PRODUCTS = products;
+  return products;
+}
+
+window.RYM_CATALOG_READY = loadCatalogInventory();
+
+function initializeCatalogPage() {
+
 function setupCollectionSlideshows() {
   const collectionSection = document.querySelector("#colecciones");
   const collectionCards = [...document.querySelectorAll(".collection-card[data-filter-link]")];
@@ -185,7 +223,7 @@ function setupCollectionSlideshows() {
     const category = card.dataset.filterLink;
     const imagePool = [...new Set(
       products
-        .filter((product) => product.category === category)
+        .filter((product) => product.category === category && product.visible !== false)
         .flatMap((product) => product.images),
     )];
 
@@ -352,7 +390,7 @@ function productCard(product) {
 
 const grid = document.querySelector("#product-grid");
 if (grid) {
-grid.innerHTML = products.map(productCard).join("");
+grid.innerHTML = products.filter((product) => product.visible !== false).map(productCard).join("");
 
 grid.addEventListener("click", (event) => {
   const addButton = event.target.closest("[data-add-product-id]");
@@ -379,7 +417,7 @@ const BAG_STORAGE_KEY = "rym-selected-products-v2";
 function loadBag() {
   try {
     const storedIds = JSON.parse(localStorage.getItem(BAG_STORAGE_KEY) || "[]");
-    return new Set(storedIds.filter((id) => products.some((product) => product.id === id && product.stock !== "Agotado")));
+    return new Set(storedIds.filter((id) => products.some((product) => product.id === id && product.visible !== false && product.stock !== "Agotado")));
   } catch {
     return new Set();
   }
@@ -405,7 +443,7 @@ function bagWhatsappUrl(selectedProducts) {
 }
 
 function renderBag() {
-  const selectedProducts = products.filter((product) => selectedProductIds.has(product.id));
+  const selectedProducts = products.filter((product) => product.visible !== false && selectedProductIds.has(product.id));
   const count = selectedProducts.length;
 
   bagCountElements.forEach((element) => {
@@ -554,3 +592,6 @@ const observer = new IntersectionObserver(
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 document.querySelector("#current-year").textContent = new Date().getFullYear();
 }
+}
+
+window.RYM_CATALOG_READY.then(initializeCatalogPage);

@@ -1,6 +1,9 @@
+async function initializeProductDetail() {
+await (window.RYM_CATALOG_READY || Promise.resolve());
+
 const PRODUCT_WHATSAPP_NUMBER = "51917578751";
 const productId = Number(new URLSearchParams(window.location.search).get("id"));
-const product = (window.RYM_PRODUCTS || []).find((item) => item.id === productId);
+const product = (window.RYM_PRODUCTS || []).find((item) => item.id === productId && item.visible !== false);
 
 const detailSection = document.querySelector("[data-product-detail]");
 const notFoundSection = document.querySelector("[data-product-not-found]");
@@ -145,3 +148,6 @@ const productHeader = document.querySelector("[data-product-header]");
 const updateHeader = () => productHeader?.classList.toggle("is-scrolled", window.scrollY > 16);
 window.addEventListener("scroll", updateHeader, { passive: true });
 updateHeader();
+}
+
+initializeProductDetail();
