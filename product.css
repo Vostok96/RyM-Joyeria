@@ -176,6 +176,15 @@
 .product-detail__facts dd { margin: 0; font-family: var(--serif); font-size: 18px; line-height: 1.2; }
 
 .product-detail__whatsapp { width: 100%; }
+.product-detail__stock--sold { color: #876c73; font-weight: 600; }
+.product-detail__whatsapp.button--sold-out {
+  background: #3d352e;
+  border-color: #3d352e;
+}
+.product-detail__whatsapp.button--sold-out:hover {
+  background: #2a241f;
+  border-color: #2a241f;
+}
 
 .product-detail__note {
   display: grid;

@@ -1,6 +1,31 @@
 (() => {
   const endpoint = "/api/analytics";
   const sessionKey = "rym-analytics-session";
+  const gaId = (window.RYM_GA_ID || document.querySelector('meta[name="rym-ga-id"]')?.content || "").trim();
+
+  function initGA4() {
+    if (!gaId || window.gtag) return;
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+
+    gtag("consent", "default", {
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
+
+    gtag("js", new Date());
+    gtag("config", gaId, { send_page_view: false });
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`;
+    document.head.appendChild(script);
+  }
+
+  initGA4();
 
   function getSessionId() {
     try {
@@ -31,6 +56,88 @@
     }
   }
 
+  function getProduct(productId) {
+    if (!productId || !window.RYM_PRODUCTS) return null;
+    return window.RYM_PRODUCTS.find((item) => item.id === Number(productId)) || null;
+  }
+
+  function sendToGA4(event, details) {
+    if (typeof window.gtag !== "function") return;
+
+    const product = getProduct(details.productId);
+    const itemPayload = product ? {
+      item_id: String(product.id),
+      item_name: product.name,
+      item_category: product.category,
+      price: product.price,
+    } : (details.productId ? { item_id: String(details.productId) } : null);
+
+    switch (event) {
+      case "page_view":
+        window.gtag("event", "page_view", {
+          page_path: `${window.location.pathname}${window.location.search}`,
+          page_title: document.title,
+        });
+        break;
+      case "view_item":
+        if (itemPayload) {
+          window.gtag("event", "view_item", {
+            currency: "PEN",
+            value: product?.price || 0,
+            items: [itemPayload],
+          });
+        }
+        break;
+      case "select_item":
+        if (itemPayload) {
+          window.gtag("event", "select_item", {
+            item_list_name: "Catálogo RyM",
+            items: [itemPayload],
+          });
+        }
+        break;
+      case "add_to_cart":
+        if (itemPayload) {
+          window.gtag("event", "add_to_cart", {
+            currency: "PEN",
+            value: product?.price || 0,
+            items: [{ ...itemPayload, quantity: 1 }],
+          });
+        }
+        break;
+      case "remove_from_cart":
+        if (itemPayload) {
+          window.gtag("event", "remove_from_cart", {
+            currency: "PEN",
+            value: product?.price || 0,
+            items: [{ ...itemPayload, quantity: 1 }],
+          });
+        }
+        break;
+      case "whatsapp_click":
+        window.gtag("event", "whatsapp_click", {
+          item_id: itemPayload?.item_id || undefined,
+          item_name: itemPayload?.item_name || undefined,
+          item_category: itemPayload?.item_category || undefined,
+          currency: "PEN",
+          value: product?.price || undefined,
+        });
+        break;
+      case "file_download":
+        window.gtag("event", "file_download", {
+          file_name: "catalogo-rym.pdf",
+          file_extension: "pdf",
+          label: details.label || "catalogo_pdf",
+        });
+        break;
+      case "filter_category":
+        window.gtag("event", "view_item_list", {
+          item_list_name: details.category || "Todas",
+        });
+        break;
+    }
+  }
+
   function send(event, details = {}) {
     const payload = JSON.stringify({
       event,
@@ -43,12 +150,27 @@
 
     if (navigator.sendBeacon) {
       navigator.sendBeacon(endpoint, new Blob([payload], { type: "application/json" }));
-      return;
+    } else {
+      fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: payload, keepalive: true }).catch(() => {});
     }
-    fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: payload, keepalive: true }).catch(() => {});
+
+    sendToGA4(event, details);
   }
 
-  window.RYM_ANALYTICS = { track: send };
+  window.RYM_ANALYTICS = {
+    track: send,
+    setConsent: (consent = {}) => {
+      if (typeof window.gtag === "function") {
+        window.gtag("consent", "update", {
+          analytics_storage: consent.analytics ? "granted" : "denied",
+          ad_storage: consent.ads ? "granted" : "denied",
+          ad_user_data: consent.ads ? "granted" : "denied",
+          ad_personalization: consent.ads ? "granted" : "denied",
+        });
+      }
+    },
+  };
+
   send("page_view");
 
   const productId = Number(new URLSearchParams(window.location.search).get("id"));

@@ -39,9 +39,28 @@ El cliente puede administrar el catálogo desde `/admin/`. El panel permite:
 
 La disponibilidad se calcula automáticamente: cantidad `0` muestra “Agotado”, cantidad `1` muestra “Última pieza” y cantidades mayores muestran “Disponible”. Los cambios se guardan en Netlify Blobs y se reflejan tanto en la web como en el PDF descargable.
 
-La contraseña no se guarda en texto visible: la función compara su hash SHA-256. Para rotarla, reemplaza `ADMIN_PASSWORD_HASH` en `netlify/functions/admin.mjs` por el SHA-256 de la nueva contraseña. No incluyas la contraseña original en el repositorio.
+La contraseña no se guarda en texto visible: la función compara su hash SHA-256. Para rotarla, define la variable de entorno `ADMIN_PASSWORD_HASH` en Netlify o reemplázala en `netlify/functions/admin.mjs` por el SHA-256 de la nueva contraseña. No incluyas la contraseña original en el repositorio.
 
-La analítica es propia y anónima. No guarda nombres, correos ni direcciones IP; comienza a acumular datos a partir del primer despliegue que incluya esta funcionalidad.
+La analítica es propia y anónima. No guarda nombres, correos ni direcciones IP; acumula métricas de los últimos 30 días mediante agregaciones automáticas que evitan demoras en el panel.
+
+### Soporte dual con Google Analytics 4 (GA4)
+
+El sitio cuenta con integración directa para GA4 con Modo de Consentimiento (Consent Mode):
+- Agrega tu ID de medición en la etiqueta `<meta name="rym-ga-id" content="G-XXXXXXXXXX" />` de las páginas HTML, o define `window.RYM_GA_ID = "G-XXXXXXXXXX"`.
+- `analytics.js` cargará automáticamente la etiqueta de Google con consentimiento por defecto y transmitirá los eventos de comercio electrónico: `view_item`, `select_item`, `add_to_cart`, `remove_from_cart`, `whatsapp_click`, `file_download` y `view_item_list`.
+- Si no se configura un ID de GA4, la analítica propia interna sigue registrando todas las visitas en `/admin/` sin requerir cookies de terceros.
+
+### Punto de restauración y reversión
+
+Antes de aplicar actualizaciones se conserva una rama y etiqueta de respaldo en Git:
+- Rama de respaldo: `backup-pre-mejoras`
+- Etiqueta: `punto-restauracion-20261019-211514`
+- Para revertir cualquier cambio en caso necesario:
+  ```powershell
+  git checkout backup-pre-mejoras
+  # O volver de forma definitiva:
+  git reset --hard backup-pre-mejoras
+  ```
 
 ## Actualizar el catálogo
 
